@@ -1,0 +1,162 @@
+================================================
+ATF FITNESS — GOOGLE SHEETS INTEGRATION GUIDE
+================================================
+
+STEP 1: Create Your Google Sheet
+---------------------------------
+1. Go to https://sheets.google.com
+2. Create a new spreadsheet
+3. Name it: "ATF Fitness Leads"
+4. In Row 1, add these headers in columns A-E:
+   A1: Timestamp
+   B1: Name
+   C1: Email
+   D1: Phone
+   E1: Goal
+
+
+STEP 2: Create the Apps Script
+---------------------------------
+1. In your Google Sheet, click: Extensions > Apps Script
+2. Delete any existing code
+3. Paste the following code:
+
+---START APPS SCRIPT CODE---
+
+function doPost(e) {
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var data = JSON.parse(e.postData.contents);
+    
+    sheet.appendRow([
+      data.timestamp,
+      data.name,
+      data.email,
+      data.phone,
+      data.goal
+    ]);
+    
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: 'success', message: 'Lead saved!' }))
+      .setMimeType(ContentService.MimeType.JSON);
+      
+  } catch (error) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: 'error', message: error.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function doGet(e) {
+  return ContentService
+    .createTextOutput(JSON.stringify({ status: 'active', message: 'ATF Lead Capture is running!' }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+---END APPS SCRIPT CODE---
+
+
+STEP 3: Deploy as Web App
+---------------------------------
+1. Click "Deploy" > "New Deployment"
+2. Click gear icon next to "Select type" > Choose "Web App"
+3. Set the following:
+   - Description: ATF Lead Capture
+   - Execute as: Me (your Google account)
+   - Who has access: Anyone
+4. Click "Deploy"
+5. Authorize the app when prompted (Allow all permissions)
+6. COPY the Web App URL (looks like: https://script.google.com/macros/s/XXXX/exec)
+
+
+STEP 4: Add URL to Website
+---------------------------------
+1. Open: js/script.js
+2. Find line 10: const GOOGLE_SHEETS_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL';
+3. Replace 'YOUR_GOOGLE_APPS_SCRIPT_URL' with the URL you copied
+4. Example: const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxXXXXX/exec';
+5. Save the file
+
+
+STEP 5: Test the Integration
+---------------------------------
+1. Open your website
+2. Fill the form with test data
+3. Check your Google Sheet — new row should appear
+4. If no data appears, check that:
+   - The URL is correct in script.js
+   - The Web App is deployed as "Anyone"
+   - You authorized the app in Step 3
+
+
+================================================
+META PIXEL SETUP (if not done yet)
+================================================
+
+1. Go to: https://business.facebook.com
+2. Navigate to: Events Manager > Pixels
+3. Create a new Pixel or copy your existing Pixel ID
+4. In BOTH index.html and thankyou.html, find:
+   fbq('init', 'YOUR_PIXEL_ID');
+   And replace YOUR_PIXEL_ID with your actual ID
+5. Also update the noscript img src URL
+
+Events being tracked:
+- PageView: Tracked on page load (index.html + thankyou.html)
+- Lead: Tracked on form submit (thankyou.html + JS)
+- InitiateCheckout: Tracked when CTA buttons clicked
+
+
+================================================
+IMAGE PLACEMENT GUIDE
+================================================
+
+Your images are organized as follows:
+
+/images/
+  logo.png          — ATF logo (auto-used in navbar & footer)
+  
+  /coach/
+    1.jpg            — Used in Credibility section (About Coach)
+    IMG_1917.jpg     — Additional coach photo
+    IMG-20251203-WA0150.jpg — Used in Hero section
+    
+  /transformations/
+    Aditya.jpg, Ajay.jpg, Amrita.jpg, etc.
+    — Used in Transformations grid (all auto-loaded)
+    
+  /backgrounds/
+    IMG-20251203-WA0041.jpg
+    IMG-20251203-WA0147.jpg
+    IMG-20251203-WA0163.jpg
+    — Available as optional background images
+
+TO REPLACE/ADD IMAGES:
+- For hero coach photo: replace images/coach/IMG-20251203-WA0150.jpg
+  OR update the src in index.html → .hero-img
+- For about section: replace images/coach/1.jpg
+  OR update the src in index.html → .cred-img
+- For transformations: Add new .jpg files to images/transformations/
+  and add a new .t-card div in the transformation grid
+
+
+================================================
+FOLDER STRUCTURE FOR UPLOAD
+================================================
+
+website/
+├── index.html              ← Main landing page
+├── thankyou.html           ← Thank you page (after form submit)
+├── css/
+│   └── style.css           ← All styles
+├── js/
+│   └── script.js           ← All JavaScript
+├── images/
+│   ├── logo.png
+│   ├── coach/              ← Coach photos
+│   ├── transformations/    ← Client transformation photos
+│   └── backgrounds/        ← Background stock photos
+└── google-sheets-setup.txt ← This file (can delete before upload)
+
+Upload ALL files/folders to your hosting root (public_html or www folder).
+================================================

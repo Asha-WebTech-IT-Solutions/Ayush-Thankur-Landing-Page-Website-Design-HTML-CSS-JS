@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Received | Ayush Thakur Fitness</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window,document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'YOUR_PIXEL_ID');
+    fbq('track', 'PageView');
+    fbq('track', 'Lead');
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=Lead&noscript=1"/>
+    </noscript>
+</head>
+<body class="ty-page">
+    <nav class="navbar" data-testid="ty-navbar">
+        <div class="container nav-inner">
+            <a href="index.html" class="nav-logo" data-testid="ty-nav-logo">
+                <img src="images/logo.png" alt="ATF Fitness" height="44">
+                <span>Ayush Thakur Fitness</span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="ty-main" data-testid="thankyou-main">
+        <div class="ty-card" data-testid="thankyou-card">
+            <div class="ty-icon-wrap" data-testid="ty-success-icon">
+                <div class="ty-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+            </div>
+            <h1 class="ty-h1" data-testid="ty-heading">Application Received!</h1>
+            <p class="ty-msg" data-testid="ty-message">
+                Your application has been received. Our team will contact you within <strong>24 hours</strong> to discuss your transformation goals.
+            </p>
+            <div class="ty-details" data-testid="ty-details">
+                <div class="ty-detail-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Application submitted successfully</span>
+                </div>
+                <div class="ty-detail-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Response within 24 hours</span>
+                </div>
+                <div class="ty-detail-item">
+                    <i class="fas fa-phone"></i>
+                    <span>Personal consultation call scheduled</span>
+                </div>
+            </div>
+            <div class="ty-social-section" data-testid="ty-social">
+                <p class="ty-social-label">Follow us while you wait:</p>
+                <div class="ty-social-btns">
+                    <a href="https://www.instagram.com/ayushthakurfitness" target="_blank" rel="noopener" class="ty-social-btn" data-testid="ty-insta-personal">
+                        <i class="fab fa-instagram"></i>
+                        <span>@ayushthakurfitness</span>
+                        <small>Personal Journey</small>
+                    </a>
+                    <a href="https://www.instagram.com/atfelitefit" target="_blank" rel="noopener" class="ty-social-btn" data-testid="ty-insta-atf">
+                        <i class="fab fa-instagram"></i>
+                        <span>@atfelitefit</span>
+                        <small>ATF Elite Fit</small>
+                    </a>
+                </div>
+            </div>
+            <a href="index.html" class="btn btn-outline ty-back-btn" data-testid="ty-back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </main>
+
+    <footer class="ty-footer" data-testid="ty-footer">
+        <p>&copy; 2025 Ayush Thakur Fitness. All rights reserved.</p>
+    </footer>
+</body>
+</html>

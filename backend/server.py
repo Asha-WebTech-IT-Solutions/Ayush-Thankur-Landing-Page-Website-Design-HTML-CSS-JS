@@ -1,4 +1,5 @@
 from fastapi import FastAPI, APIRouter
+from fastapi.staticfiles import StaticFiles
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -68,6 +69,11 @@ async def get_status_checks():
 
 # Include the router in the main app
 app.include_router(api_router)
+
+# Serve the ATF website static files at /api/website
+WEBSITE_DIR = Path(__file__).parent.parent / "website"
+if WEBSITE_DIR.exists():
+    app.mount("/api/website", StaticFiles(directory=str(WEBSITE_DIR), html=True), name="website")
 
 app.add_middleware(
     CORSMiddleware,
