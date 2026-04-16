@@ -138,8 +138,7 @@ function addRevealClasses() {
     });
     document.querySelectorAll('.cred-img-col').forEach(el => el.classList.add('reveal-left'));
     document.querySelectorAll('.cred-content-col').forEach(el => el.classList.add('reveal-right'));
-    document.querySelectorAll('.form-left').forEach(el => el.classList.add('reveal-left'));
-    document.querySelectorAll('.form-right').forEach(el => el.classList.add('reveal-right'));
+    // Do NOT add reveal to form sections - they must always be crisp and immediately visible
 }
 
 const revealObserver = new IntersectionObserver((entries) => {
