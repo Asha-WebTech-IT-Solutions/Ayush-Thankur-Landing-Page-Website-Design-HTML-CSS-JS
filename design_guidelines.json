@@ -1,0 +1,120 @@
+{
+  "theme": "Light",
+  "archetype": "Performance Pro blended with Swiss Clarity",
+  "colors": {
+    "primary": "#2563EB",
+    "primary_dark": "#1D4ED8",
+    "primary_light": "#60A5FA",
+    "secondary": "#EFF6FF",
+    "background": "#FFFFFF",
+    "surface": "#F8FAFC",
+    "surface_border": "#E2E8F0",
+    "text_main": "#0F172A",
+    "text_muted": "#475569",
+    "text_light": "#94A3B8",
+    "gradient_primary": "linear-gradient(135deg, #1E3A8A 0%, #2563EB 50%, #60A5FA 100%)",
+    "gradient_surface": "linear-gradient(180deg, #FFFFFF 0%, #EFF6FF 100%)"
+  },
+  "typography": {
+    "heading_font": "'Poppins', sans-serif",
+    "body_font": "'Inter', sans-serif",
+    "font_weights": {
+      "body": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700,
+      "black": 900
+    },
+    "scales": {
+      "h1": "clamp(3rem, 6vw, 5rem)",
+      "h2": "clamp(2.5rem, 5vw, 3.5rem)",
+      "h3": "clamp(1.5rem, 3vw, 2rem)",
+      "body": "1rem",
+      "body_large": "1.125rem",
+      "small": "0.875rem"
+    }
+  },
+  "spacing_and_layout": {
+    "container_max_width": "1280px",
+    "section_padding_y": "clamp(5rem, 8vw, 8rem)",
+    "section_padding_x": "clamp(1rem, 4vw, 2rem)",
+    "grid_gap": "2rem",
+    "border_radius_large": "24px",
+    "border_radius": "16px",
+    "border_radius_small": "8px"
+  },
+  "components": {
+    "button_primary": "background: var(--gradient-primary); color: #fff; padding: 1rem 2rem; border-radius: 50px; font-weight: 600; font-family: 'Poppins'; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 14px 0 rgba(37,99,235,0.39); border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;",
+    "button_outline": "background: transparent; color: var(--primary); padding: 1rem 2rem; border-radius: 50px; font-weight: 600; font-family: 'Poppins'; transition: all 0.2s; border: 2px solid var(--primary); cursor: pointer; text-decoration: none;",
+    "card": "background: #fff; border: 1px solid var(--surface-border); border-radius: var(--border-radius); padding: 2.5rem 2rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); transition: transform 0.3s ease; position: relative; overflow: hidden;",
+    "navbar": "position: sticky; top: 0; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--surface-border); z-index: 100; height: 80px; display: flex; align-items: center;",
+    "form_input": "width: 100%; padding: 1rem 1.25rem; border: 1.5px solid var(--surface-border); border-radius: var(--border-radius-small); font-family: 'Inter'; font-size: 1rem; color: var(--text-main); transition: border-color 0.2s, box-shadow 0.2s; background: #fff;",
+    "marquee": "overflow: hidden; white-space: nowrap; background: var(--secondary); color: var(--primary_dark); padding: 1.5rem 0; font-family: 'Poppins'; font-weight: 600; font-size: 1.25rem; border-top: 1px solid var(--surface-border); border-bottom: 1px solid var(--surface-border);"
+  },
+  "media": {
+    "logo": {
+      "url": "https://static.prod-images.emergentagent.com/jobs/4414ccc2-5f57-44cb-bd9f-d4a3143cb549/images/48609f9765579d395374136fe138e32e608928cb445ab5ddda45f5edb927d188.png",
+      "alt": "ATF Fitness Logo"
+    },
+    "hero_image": {
+      "url": "https://images.pexels.com/photos/16966301/pexels-photo-16966301.jpeg",
+      "alt": "Fitness Coach helping client"
+    },
+    "feature_images": [
+      {
+        "url": "https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3",
+        "alt": "Strength Training"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c",
+        "alt": "Nutrition and healthy meals"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1774791581465-a55d8fe6b2db",
+        "alt": "Lifestyle and outdoor running"
+      }
+    ],
+    "icons_strategy": "Use FontAwesome via CDN (<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\">). DO NOT use emojis."
+  },
+  "sections": [
+    {
+      "name": "Navbar",
+      "details": "Sticky top bar. Logo on left (height ~48px). Center links: 'Programs', 'Process', 'Success Stories'. Right: 'Join Now' CTA button. Clean, generous spacing."
+    },
+    {
+      "name": "Hero",
+      "details": "High visual impact 2-column layout. Left: Massive H1 typography (Poppins Black), e.g. 'Transform Your Body & Health'. Highlight words with primary blue. Subtext addressing busy professionals & PCOS/Thyroid. Primary button to '#lead-form'. Right: Trainer image. Add subtle blue gradient blobs as background decorative elements."
+    },
+    {
+      "name": "Marquee Ticker",
+      "details": "CSS keyframe infinite scroll. Text items: 'Fat Loss', 'Muscle Gain', 'PCOS Management', 'Diabetes Reversal', 'Lifestyle Transformation', separated by stars or FontAwesome icons."
+    },
+    {
+      "name": "Problem / Who It's For (Feature Cards)",
+      "details": "CSS Grid (3 columns). White cards with blue icon, heading, and text. Addresses struggles: Lack of time, stubborn fat, medical conditions."
+    },
+    {
+      "name": "Step-by-Step Process",
+      "details": "Vertical timeline or 3-step horizontal grid. Step 1: Assessment, Step 2: Custom Plan, Step 3: 1-on-1 Check-ins. Use large typography numbers ('01', '02', '03') in light blue (`var(--secondary)`)."
+    },
+    {
+      "name": "Program Discovery / Services",
+      "details": "Use feature images. Layout similar to class discovery. Image top, content bottom. 'Fat Loss Program', 'Medical Condition Management', 'Muscle Building'."
+    },
+    {
+      "name": "Offer / Lead Form",
+      "details": "Split section. Left: 'Start Your Transformation Today' with bullet points of what they get. Right: Clean white card containing HTML form. Inputs for Name, Email, Phone, Goal (select dropdown). Large submit button. Must include Meta Pixel logic stub in JS."
+    },
+    {
+      "name": "Footer",
+      "details": "Deep Blue or simple White layout. Logo, copyright, 'Designed for ATF'."
+    }
+  ],
+  "technical_requirements": {
+    "css": "Use custom CSS properties at `:root` in `style.css`. Implement Grid/Flexbox. Use standard CSS media queries for responsiveness. DO NOT USE TAILWIND OR ANY FRAMEWORK. Pure CSS only.",
+    "javascript": "Vanilla JS in `script.js` for: mobile menu toggle, sticky nav shadow on scroll, marquee pause on hover, form submission simulation (prevent default, redirect to `thankyou.html`). Include a dummy Meta Pixel script.",
+    "html": "Semantic tags. Must include Google Fonts links for Poppins and Inter. FontAwesome for icons.",
+    "testing": "All interactive elements (buttons, inputs, form submit) MUST have `data-testid` attributes."
+  },
+  "instructions_to_main_agent": "Implement `index.html`, `thankyou.html`, `style.css`, and `script.js`. Strict requirement: PURE HTML, CSS, JS ONLY. No React, no Tailwind, no libraries. All CSS must go in `style.css`. Create an ultra-premium layout matching the white + blue + gradient scheme, adapting the 'RAGA' app inspiration. Ensure strong contrast and generous spacing."
+}
