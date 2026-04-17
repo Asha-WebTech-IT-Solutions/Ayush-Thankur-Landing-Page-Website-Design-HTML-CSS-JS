@@ -1173,7 +1173,35 @@ a.press-pill:hover { text-decoration: underline; }
 .footer-bottom p { font-size: 0.8rem; color: rgba(255,255,255,0.4); }
 
 /* ============================================
-   SCROLL TO TOP
+   STICKY CONTACT BUTTONS (WhatsApp + Email)
+   ============================================ */
+.sticky-contact {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    z-index: 9999;
+}
+.sticky-btn {
+    width: 54px; height: 54px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.22);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+    color: #fff;
+}
+.sticky-btn:hover { transform: scale(1.12); box-shadow: 0 8px 28px rgba(0,0,0,0.32); }
+.sticky-wa  { background: #25D366; }
+.sticky-email { background: var(--blue-600); }
+
+/* ============================================
+   SCROLL TO TOP (hidden/removed)
    ============================================ */
 .scroll-top {
     position: fixed;
@@ -1222,8 +1250,14 @@ a.press-pill:hover { text-decoration: underline; }
 .reveal-right.visible { opacity: 1; transform: translateX(0); }
 
 /* ============================================
-   THANK YOU PAGE
+   FOOTER BOTTOM DEVELOPER LINKS
    ============================================ */
+.footer-bottom a {
+    color: var(--blue-400);
+    transition: color var(--transition);
+}
+.footer-bottom a:hover { color: #fff; }
+.footer-bottom a strong { font-weight: 700; }
 .ty-page { background: var(--gradient-soft); min-height: 100vh; }
 .ty-main {
     min-height: calc(100vh - 140px);
@@ -1384,4 +1418,6 @@ a.press-pill:hover { text-decoration: underline; }
     .transform-grid { grid-template-columns: repeat(2, 160px); }
     .hero-btns { flex-direction: column; }
     .hero-btns .btn { width: 100%; justify-content: center; }
+    .sticky-contact { bottom: 1.25rem; right: 1.25rem; }
+    .sticky-btn { width: 48px; height: 48px; font-size: 1.3rem; }
 }

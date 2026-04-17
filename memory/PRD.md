@@ -21,20 +21,20 @@
 - `index.html` — Main landing page (all sections)
 - `thankyou.html` — Post-form-submission thank you page
 
-### Sections (index.html)
+### Sections ORDER (index.html)
 1. **Navbar** — Sticky, responsive with mobile hamburger menu
-2. **Hero** — 2-col layout, headline, coach image, floating stat cards, animated counters
+2. **Hero** — 2-col layout, headline, new taekwondo coach image, floating stat cards, animated counters
 3. **Marquee Ticker** — Infinite CSS animation with fitness topics
 4. **Problem Section** — 4 pain point cards (Why People Fail)
-5. **Services/USP** — 3-column cards (Core, Advanced Health, Coaching)
-6. **Who It's For** — 5 audience segment cards
-7. **Process** — 3-step numbered journey on blue gradient background
-8. **Credibility/About** — Coach bio, credentials, press mentions (INC91, Hindustan Bytes, The Daily Beat)
-9. **Transformations** — 12 client photos in scrollable grid
+5. **Transformations** — 12 client photos in scrollable grid (MOVED UP - now 3rd section after problem)
+6. **Services/USP** — 3-column cards (Core, Advanced Health, Coaching)
+7. **Who It's For** — 5 audience segment cards
+8. **Process** — 3-step numbered journey on blue gradient background
+9. **Credibility/About** — New taekwondo coach photo, "Former International Champion" badge, press mentions
 10. **Philosophy** — Side-by-side comparison (Old Way vs ATF Way)
 11. **Offer Section** — 4 offer cards with big CTA
 12. **Lead Form** — Name, Email, Phone, Goal + Google Sheets API + Meta Pixel
-13. **Footer** — Dark, logo, social links, quick links
+13. **Footer** — Dark, logo, social links, quick links, developer credits
 
 ### Features
 - ✅ Meta Pixel (placeholder `YOUR_PIXEL_ID`) — PageView + Lead events

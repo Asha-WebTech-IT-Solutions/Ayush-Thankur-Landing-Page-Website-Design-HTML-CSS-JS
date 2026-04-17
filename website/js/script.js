@@ -52,20 +52,8 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 // ----------------------------------------
-// SCROLL TO TOP BUTTON
+// SCROLL TO TOP — REMOVED PER CLIENT REQUEST
 // ----------------------------------------
-const scrollTopBtn = document.getElementById('scrollTop');
-window.addEventListener('scroll', () => {
-    if (scrollTopBtn) {
-        scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
-    }
-}, { passive: true });
-
-if (scrollTopBtn) {
-    scrollTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-}
 
 // ----------------------------------------
 // SMOOTH SCROLL FOR ANCHOR LINKS
@@ -306,3 +294,53 @@ document.querySelectorAll('.btn-primary').forEach(btn => {
         }
     });
 });
+-----
+document.querySelectorAll('.btn-primary').forEach(btn => {
+    btn.addEventListener('click', () => {
+        if (typeof fbq !== 'undefined' && btn.getAttribute('href') === '#lead-form') {
+            fbq('track', 'InitiateCheckout', {
+                content_name: 'ATF Coaching Application CTA',
+            });
+        }
+    });
+});
+
+// ----------------------------------------
+// META PIXEL: TRACK SECTION VIEWS
+// ----------------------------------------
+(function setupPixelTracking() {
+    const pixelTargets = [
+        { id: 'services',         event: 'ViewContent', params: { content_name: 'Programs Section' } },
+        { id: 'transformations',  event: 'ViewContent', params: { content_name: 'Transformations Section' } },
+        { id: 'lead-form',        event: 'Contact',     params: { content_name: 'Lead Form Viewed' } },
+        { id: 'offer',            event: 'ViewContent', params: { content_name: 'Offer Section' } },
+    ];
+    const firedEvents = new Set();
+    const pixelObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !firedEvents.has(entry.target.id)) {
+                firedEvents.add(entry.target.id);
+                const target = pixelTargets.find(t => t.id === entry.target.id);
+                if (target && typeof fbq !== 'undefined') {
+                    fbq('track', target.event, target.params);
+                }
+            }
+        });
+    }, { threshold: 0.3 });
+    pixelTargets.forEach(t => {
+        const el = document.getElementById(t.id);
+        if (el) pixelObserver.observe(el);
+    });
+
+    // Track form field interaction (Lead Intent)
+    const firstInput = document.getElementById('fname');
+    let formStartTracked = false;
+    if (firstInput) {
+        firstInput.addEventListener('focus', () => {
+            if (!formStartTracked && typeof fbq !== 'undefined') {
+                formStartTracked = true;
+                fbq('track', 'Lead', { content_name: 'Form Started', status: 'started' });
+            }
+        });
+    }
+})();
