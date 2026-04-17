@@ -6,9 +6,7 @@
 // ----------------------------------------
 // GOOGLE SHEETS API CONFIGURATION
 // ----------------------------------------
-// INSTRUCTIONS: Replace this URL with your Google Apps Script Web App URL
-// (See google-sheets-setup.txt for full instructions)
-const GOOGLE_SHEETS_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL';
+const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwuU0PP9cLILYTKWqwJNBfpf12MA-6a2UVS_fWH09UCkNMBmupSx8jfYhBSvEP8391Kvw/exec';
 
 // ----------------------------------------
 // NAVBAR: MOBILE MENU TOGGLE
@@ -113,7 +111,6 @@ function addRevealClasses() {
         '.offer-card',
         '.t-card',
         '.cred-grid',
-        '.form-grid',
         '.philosophy-wrap',
         '.problem-bridge',
     ];
@@ -196,6 +193,7 @@ const formMsg = document.getElementById('formMsg');
 if (leadForm) {
     leadForm.addEventListener('submit', async function (e) {
         e.preventDefault();
+        e.stopPropagation();
 
         // Get values
         const name = document.getElementById('fname')?.value.trim();
@@ -224,25 +222,18 @@ if (leadForm) {
             goal: goal || 'Not specified',
         };
 
+        // Fire and forget to Google Sheets, then always redirect
         try {
-            // Check if a real URL is configured
-            if (GOOGLE_SHEETS_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL') {
-                // Demo mode: simulate success after 1.2s
-                await new Promise(r => setTimeout(r, 1200));
-                handleFormSuccess();
-            } else {
-                // Real submission to Google Sheets
-                await fetch(GOOGLE_SHEETS_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload),
-                });
-                handleFormSuccess();
-            }
+            await fetch(GOOGLE_SHEETS_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            });
         } catch (err) {
-            console.error('Form submission error:', err);
-            // Even if there's an error, since no-cors won't throw on 200, redirect on success assumption
+            // no-cors never throws, but catch just in case
+            console.warn('Sheet submission note:', err);
+        } finally {
             handleFormSuccess();
         }
     });
@@ -285,16 +276,6 @@ function isValidEmail(email) {
 // ----------------------------------------
 // META PIXEL: TRACK BUTTON CLICKS (Lead Intent)
 // ----------------------------------------
-document.querySelectorAll('.btn-primary').forEach(btn => {
-    btn.addEventListener('click', () => {
-        if (typeof fbq !== 'undefined' && btn.getAttribute('href') === '#lead-form') {
-            fbq('track', 'InitiateCheckout', {
-                content_name: 'ATF Coaching Application CTA',
-            });
-        }
-    });
-});
------
 document.querySelectorAll('.btn-primary').forEach(btn => {
     btn.addEventListener('click', () => {
         if (typeof fbq !== 'undefined' && btn.getAttribute('href') === '#lead-form') {

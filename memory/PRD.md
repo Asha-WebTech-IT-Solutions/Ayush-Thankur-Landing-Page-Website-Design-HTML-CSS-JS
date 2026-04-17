@@ -38,7 +38,7 @@
 
 ### Features
 - ✅ Meta Pixel (placeholder `YOUR_PIXEL_ID`) — PageView + Lead events
-- ✅ Google Sheets form integration (placeholder URL, demo mode works)
+- ✅ Google Sheets form integration — LIVE URL configured, redirects to thankyou.html
 - ✅ Form validation + submission → redirect to thankyou.html
 - ✅ Mobile-first responsive design
 - ✅ Scroll reveal animations (IntersectionObserver)

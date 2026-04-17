@@ -6,12 +6,15 @@
 /* ---------- RESET & BASE ---------- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; }
+html, body { height: 100%; }
 body {
     font-family: 'Inter', sans-serif;
     color: #0F172A;
     background: #ffffff;
     line-height: 1.6;
     overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 }
 img { max-width: 100%; display: block; }
 a { text-decoration: none; color: inherit; }
@@ -1112,6 +1115,7 @@ a.press-pill:hover { text-decoration: underline; }
     background: var(--gray-900);
     color: rgba(255,255,255,0.8);
     padding-top: clamp(3rem, 6vw, 5rem);
+    margin-bottom: 0;
 }
 .footer-grid {
     display: grid;
@@ -1172,8 +1176,8 @@ a.press-pill:hover { text-decoration: underline; }
 }
 .footer-bottom p { font-size: 0.8rem; color: rgba(255,255,255,0.4); }
 
-/* ============================================
-   STICKY CONTACT BUTTONS (WhatsApp + Email)
+/* Lead form section - no top padding gap after offer */
+.bg-gradient-soft { padding-top: clamp(3rem, 6vw, 5rem); }
    ============================================ */
 .sticky-contact {
     position: fixed;
