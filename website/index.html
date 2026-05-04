@@ -3,29 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Ayush Thakur Fitness - Expert coaching for fat loss, muscle gain & lifestyle transformation. Former International Martial Artist with 9+ years of proven transformations.">
-    <meta name="keywords" content="fitness coaching, fat loss, muscle gain, PCOS, diabetes, thyroid, lifestyle transformation, Ayush Thakur, ATF">
-    <meta property="og:title" content="Ayush Thakur Fitness | Transform Your Body & Health">
-    <meta property="og:description" content="Get Leaner, Stronger & Healthier — Without Starving, Confusion, or Rebound.">
-    <meta property="og:image" content="images/coach/IMG-20251203-WA0150.jpg">
-    <title>Ayush Thakur Fitness | Transform Your Body & Health</title>
+    <meta name="description" content="Book a 1:1 Consultation with Ayush Thakur — Elite Fitness Coach & Former International Martial Artist. Fat Loss, Muscle Gain & Clinical Conditions. Only ₹149.">
+    <title>Ayush Thakur Fitness | Book Your ₹149 Consultation</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-    <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- Meta Pixel Code -->
-    <!-- INSTRUCTIONS: Replace YOUR_PIXEL_ID with your actual Facebook Pixel ID -->
+    <!-- Meta Pixel -->
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -35,16 +24,25 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window,document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', 'YOUR_PIXEL_ID');
+    fbq('init', '891206890606172');
     fbq('track', 'PageView');
     </script>
-    <noscript>
-        <img height="1" width="1" style="display:none"
-        src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/>
-    </noscript>
-    <!-- End Meta Pixel Code -->
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=891206890606172&ev=PageView&noscript=1"/></noscript>
 </head>
 <body>
+
+<!-- ========== URGENCY BANNER ========== -->
+<div class="urgency-banner" data-testid="urgency-banner">
+    <i class="fas fa-fire"></i>
+    Only <strong>3 consultation slots</strong> left this week &mdash; <strong>500+</strong> clients already transformed
+    <i class="fas fa-fire"></i>
+</div>
+
+<!-- ========== VIEWER COUNT BAR ========== -->
+<div class="viewer-bar" data-testid="viewer-bar">
+    <span class="viewer-dot"></span>
+    <span id="viewerCount">127</span> people are viewing this right now
+</div>
 
 <!-- ========== NAVBAR ========== -->
 <nav class="navbar" id="navbar" data-testid="navbar">
@@ -54,27 +52,29 @@
             <span>Ayush Thakur Fitness</span>
         </a>
         <ul class="nav-links" id="navLinks" data-testid="nav-links">
-            <li><a href="#services">Programs</a></li>
-            <li><a href="#process">Process</a></li>
-            <li><a href="#transformations">Results</a></li>
+            <li><a href="#results">Results</a></li>
             <li><a href="#about">About</a></li>
+            <li><a href="#services">Programs</a></li>
+            <li><a href="#book-form">Book</a></li>
         </ul>
-        <a href="#lead-form" class="btn btn-primary nav-cta" data-testid="nav-cta-btn">Apply Now</a>
+        <a href="#book-form" class="btn btn-cta-pulse nav-cta" data-testid="nav-cta-btn">
+            <i class="fas fa-calendar-check"></i> Book &#8377;149
+        </a>
         <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" data-testid="nav-toggle-btn">
             <i class="fas fa-bars" id="navIcon"></i>
         </button>
     </div>
-    <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu" data-testid="mobile-menu">
-        <a href="#services" class="mobile-link">Programs</a>
-        <a href="#process" class="mobile-link">Process</a>
-        <a href="#transformations" class="mobile-link">Results</a>
+        <a href="#results" class="mobile-link">Results</a>
         <a href="#about" class="mobile-link">About</a>
-        <a href="#lead-form" class="btn btn-primary mobile-cta" data-testid="mobile-cta-btn">Apply Now</a>
+        <a href="#services" class="mobile-link">Programs</a>
+        <a href="#book-form" class="btn btn-cta-pulse mobile-cta" data-testid="mobile-cta-btn">
+            <i class="fas fa-calendar-check"></i> Book Consultation &#8377;149
+        </a>
     </div>
 </nav>
 
-<!-- ========== HERO ========== -->
+<!-- ========== HERO WITH VIDEO ========== -->
 <section class="hero" id="hero" data-testid="hero-section">
     <div class="hero-bg">
         <div class="hero-blob hero-blob-1"></div>
@@ -91,7 +91,7 @@
                 <span class="highlight-text">Healthier</span>
             </h1>
             <p class="hero-sub">
-                Without Starving, Confusion, or Rebound. Coaching by Ayush Thakur &mdash; with <strong>9+ Years of Proven Transformations</strong> across Fat Loss, Muscle Gain &amp; Clinical Conditions.
+                Without Starving, Confusion, or Rebound. Coaching by Ayush Thakur &mdash; 9+ Years of Proven Transformations across Fat Loss, Muscle Gain &amp; Clinical Conditions.
             </p>
             <div class="hero-stats" data-testid="hero-stats">
                 <div class="stat">
@@ -109,32 +109,43 @@
                     <span class="stat-lbl">Personalised</span>
                 </div>
             </div>
-            <div class="hero-btns">
-                <a href="#lead-form" class="btn btn-primary btn-lg" data-testid="hero-cta-primary">
-                    <i class="fas fa-arrow-right"></i> Start Your Transformation
+            <!-- Price + CTA -->
+            <div class="hero-price-block" data-testid="hero-price-block">
+                <div class="price-row">
+                    <span class="price-orig"><s>&#8377;1,999</s></span>
+                    <span class="price-now">&#8377;149 <span class="price-only">only</span></span>
+                </div>
+                <a href="#book-form" class="btn btn-cta-pulse btn-xl" data-testid="hero-cta-btn">
+                    <i class="fas fa-calendar-check"></i>
+                    Book Consultation for &#8377;149
                 </a>
-                <a href="#transformations" class="btn btn-outline btn-lg" data-testid="hero-cta-secondary">
-                    <i class="fas fa-images"></i> View Results
-                </a>
+                <div class="slots-urgency" data-testid="slots-urgency">
+                    <i class="fas fa-clock"></i> Only <strong>3 slots left</strong> this week
+                </div>
             </div>
         </div>
-        <div class="hero-img-col" data-testid="hero-image-col">
-            <div class="hero-img-wrap">
-                <div class="hero-img-bg"></div>
-                <img src="images/coach/IMG-20251203-WA0150.jpg" alt="Ayush Thakur - Elite Fitness Coach" class="hero-img" data-testid="hero-coach-img">
-                <div class="float-card fc-1" data-testid="float-card-transformations">
-                    <i class="fas fa-fire"></i>
-                    <div>
-                        <strong>500+</strong>
-                        <span>Transformations</span>
-                    </div>
+        <!-- YouTube Video -->
+        <div class="hero-video-col" data-testid="hero-video-col">
+            <div class="video-frame">
+                <div class="video-badge-top">Watch Ayush Explain the System</div>
+                <div class="video-wrap" data-testid="youtube-video">
+                    <iframe
+                        src="https://www.youtube.com/embed/6zso3gDedpo?autoplay=1&mute=1&loop=1&playlist=6zso3gDedpo&controls=1&rel=0&modestbranding=1"
+                        title="Ayush Thakur Fitness - Transformation System"
+                        frameborder="0"
+                        allow="autoplay; encrypted-media; picture-in-picture"
+                        allowfullscreen
+                        loading="lazy"
+                    ></iframe>
                 </div>
-                <div class="float-card fc-2" data-testid="float-card-support">
-                    <i class="fas fa-headset"></i>
-                    <div>
-                        <strong>24/7</strong>
-                        <span>Coach Support</span>
+                <div class="video-cta-below">
+                    <div class="price-row-sm">
+                        <s>&#8377;1,999</s> &nbsp;<strong>&#8377;149 only</strong>
                     </div>
+                    <a href="#book-form" class="btn btn-cta-pulse btn-full" data-testid="video-cta-btn">
+                        <i class="fas fa-calendar-check"></i> Book Consultation &#8377;149
+                    </a>
+                    <p class="slots-sm"><i class="fas fa-fire"></i> 3 LEFT FOR THIS WEEK</p>
                 </div>
             </div>
         </div>
@@ -143,7 +154,7 @@
 
 <!-- ========== MARQUEE ========== -->
 <div class="marquee-strip" data-testid="marquee-strip">
-    <div class="marquee-track" id="marqueeTrack">
+    <div class="marquee-track">
         <div class="marquee-content">
             <span><i class="fas fa-bolt"></i> Fat Loss</span>
             <span><i class="fas fa-dumbbell"></i> Muscle Gain</span>
@@ -153,7 +164,6 @@
             <span><i class="fas fa-chart-line"></i> Blood Marker Optimisation</span>
             <span><i class="fas fa-person-running"></i> Injury Rehab</span>
             <span><i class="fas fa-moon"></i> Sleep Optimisation</span>
-            <!-- duplicate for seamless loop -->
             <span><i class="fas fa-bolt"></i> Fat Loss</span>
             <span><i class="fas fa-dumbbell"></i> Muscle Gain</span>
             <span><i class="fas fa-heart-pulse"></i> PCOS Management</span>
@@ -166,47 +176,8 @@
     </div>
 </div>
 
-<!-- ========== PROBLEM SECTION ========== -->
-<section class="section bg-white" id="problem" data-testid="problem-section">
-    <div class="container">
-        <div class="section-label">The Hard Truth</div>
-        <h2 class="section-h2">Why Most People <span class="text-blue">Never Reach</span> Their Goals</h2>
-        <p class="section-sub">You don't lack motivation. You lack the right structure, personalisation, and accountability.</p>
-        <div class="grid-4" data-testid="problem-grid">
-            <div class="problem-card" data-testid="problem-1">
-                <div class="pcard-icon red"><i class="fas fa-copy"></i></div>
-                <h3>Copy-Paste Diets</h3>
-                <p>Generic plans designed for nobody. No lifestyle consideration. Just frustration, confusion and zero results.</p>
-            </div>
-            <div class="problem-card" data-testid="problem-2">
-                <div class="pcard-icon red"><i class="fas fa-skull-crossbones"></i></div>
-                <h3>Extreme &amp; Unsustainable</h3>
-                <p>Crash diets, starvation, 2-hour sessions. You lose weight — then gain it all back. The endless cycle.</p>
-            </div>
-            <div class="problem-card" data-testid="problem-3">
-                <div class="pcard-icon red"><i class="fas fa-ban"></i></div>
-                <h3>No Medical Awareness</h3>
-                <p>Ignoring blood markers, hormones, PCOS, thyroid. One plan for everyone when your body has specific needs.</p>
-            </div>
-            <div class="problem-card" data-testid="problem-4">
-                <div class="pcard-icon red"><i class="fas fa-ghost"></i></div>
-                <h3>Zero Support After Payment</h3>
-                <p>Buy a plan, coach disappears. No accountability, no adjustments — and no one to answer when you're stuck.</p>
-            </div>
-        </div>
-        <div class="problem-bridge" data-testid="problem-bridge">
-            <div class="bridge-line"></div>
-            <div class="bridge-text">
-                <i class="fas fa-arrow-down"></i>
-                <p>That's exactly where we do things <strong>differently.</strong></p>
-            </div>
-            <div class="bridge-line"></div>
-        </div>
-    </div>
-</section>
-
-<!-- ========== TRANSFORMATIONS ========== -->
-<section class="section bg-light" id="transformations" data-testid="transformations-section">
+<!-- ========== RESULTS / TRANSFORMATIONS ========== -->
+<section class="section bg-light" id="results" data-testid="results-section">
     <div class="container">
         <div class="section-label">Real Results</div>
         <h2 class="section-h2">Real People. <span class="text-blue">Real Transformations.</span></h2>
@@ -227,26 +198,95 @@
                 <div class="t-card" data-testid="t-sumeet"><img src="images/transformations/Sumeet.jpg" alt="Sumeet Transformation" loading="lazy"><div class="t-overlay"><span>Sumeet</span></div></div>
             </div>
         </div>
-        <div class="text-center mt-2" data-testid="transform-cta">
-            <a href="#lead-form" class="btn btn-primary btn-lg">
-                <i class="fas fa-arrow-right"></i> I Want These Results
-            </a>
+    </div>
+</section>
+
+<!-- ========== BOOK CTA STRIP 1 ========== -->
+<div class="cta-strip" data-testid="cta-strip-1">
+    <div class="container cta-strip-inner">
+        <div class="cta-strip-text">
+            <i class="fas fa-fire"></i>
+            <span>Ready to transform? Only <strong>3 slots left</strong> this week</span>
+        </div>
+        <a href="#book-form" class="btn btn-cta-pulse" data-testid="cta-strip-1-btn">
+            <i class="fas fa-calendar-check"></i> Book Consultation &#8377;149
+        </a>
+    </div>
+</div>
+
+<!-- ========== INTRODUCTION / ABOUT ========== -->
+<section class="section bg-white" id="about" data-testid="about-section">
+    <div class="container">
+        <div class="cred-grid">
+            <div class="cred-img-col reveal-left" data-testid="cred-img-col">
+                <div class="cred-img-wrap">
+                    <img src="images/coach/coach_new_2.jpg" alt="Ayush Thakur - Former International Champion & Fitness Coach" class="cred-img" loading="lazy">
+                    <div class="cred-float-badge" data-testid="cred-float-badge">
+                        <i class="fas fa-medal"></i>
+                        <div>
+                            <strong>Former International Champion</strong>
+                            <span>Elite Fitness Coach</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cred-content-col reveal-right" data-testid="cred-content">
+                <div class="section-label">Meet Your Coach</div>
+                <h2 class="section-h2">Why <span class="text-blue">Ayush Thakur</span>?</h2>
+                <p class="cred-desc">Not just a fitness coach — a former International Martial Artist who has spent over 9 years transforming hundreds of lives across fat loss, muscle gain, and clinical conditions like PCOS, diabetes, and thyroid.</p>
+                <div class="cred-highlights" data-testid="cred-highlights">
+                    <div class="cred-item">
+                        <div class="cred-icon"><i class="fas fa-trophy"></i></div>
+                        <div><strong>Former International Martial Artist</strong><p>Discipline, performance &amp; results are in his DNA.</p></div>
+                    </div>
+                    <div class="cred-item">
+                        <div class="cred-icon"><i class="fas fa-users"></i></div>
+                        <div><strong>500+ Clients Transformed Worldwide</strong><p>Real results — not just photos, but measurable health improvements.</p></div>
+                    </div>
+                    <div class="cred-item">
+                        <div class="cred-icon"><i class="fas fa-newspaper"></i></div>
+                        <div><strong>Featured in Leading Publications</strong><p>INC91, Hindustan Bytes, The Daily Beat — one of India's most recognised fitness coaches.</p></div>
+                    </div>
+                    <div class="cred-item">
+                        <div class="cred-icon"><i class="fas fa-dna"></i></div>
+                        <div><strong>Clinical Conditions Expert</strong><p>PCOS, diabetes, thyroid, BP — where most coaches stop, we start.</p></div>
+                    </div>
+                </div>
+                <div class="press-row" data-testid="press-row">
+                    <span class="press-label">As seen in</span>
+                    <a href="https://hindustanbytes.com/ayush-thakur-new-indias-fitness-coach-and-a-former-international-martial-artist" target="_blank" rel="noopener" class="press-pill" data-testid="press-hindustan">Hindustan Bytes</a>
+                    <a href="https://www.thedailybeat.in/ayush-thakur-new-indias-fitness-coach-and-a-former-international-martial-artist" target="_blank" rel="noopener" class="press-pill" data-testid="press-dailybeat">The Daily Beat</a>
+                    <a href="https://share.google/L3KtV7UgBuUgI7GjG" target="_blank" rel="noopener" class="press-pill" data-testid="press-inc91">INC91</a>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- ========== SERVICES / USP SECTION ========== -->
+<!-- ========== BOOK CTA STRIP 2 ========== -->
+<div class="cta-strip cta-strip-dark" data-testid="cta-strip-2">
+    <div class="container cta-strip-inner">
+        <div class="cta-strip-text">
+            <i class="fas fa-star"></i>
+            <span>"Anyone can help you lose weight. Very few can help you <strong>keep it off while fixing your health.</strong>"</span>
+        </div>
+        <a href="#book-form" class="btn btn-white" data-testid="cta-strip-2-btn">
+            <i class="fas fa-calendar-check"></i> Book &#8377;149
+        </a>
+    </div>
+</div>
+
+<!-- ========== SERVICES / FULL-STACK SYSTEM ========== -->
 <section class="section bg-light" id="services" data-testid="services-section">
     <div class="container">
         <div class="section-label">Your Complete System</div>
         <h2 class="section-h2">This Is Not Just <span class="text-blue">Coaching</span></h2>
         <p class="section-sub">While others give you a PDF and disappear — we build a <strong>full-stack transformation system</strong> around your life.</p>
         <div class="services-grid" data-testid="services-grid">
-            <div class="service-card" data-testid="service-core">
+            <div class="service-card reveal" data-testid="service-core">
                 <div class="service-card-top">
                     <div class="scard-icon orange"><i class="fas fa-fire-flame-curved"></i></div>
-                    <h3>Core Services</h3>
-                    <p>Everything you need to transform</p>
+                    <h3>Core Services</h3><p>Everything you need to transform</p>
                 </div>
                 <ul class="check-list">
                     <li><i class="fas fa-check-circle"></i> Personalised Nutrition Plan</li>
@@ -259,12 +299,11 @@
                     <li><i class="fas fa-check-circle"></i> Grocery &amp; Shopping Guide</li>
                 </ul>
             </div>
-            <div class="service-card service-featured" data-testid="service-advanced">
+            <div class="service-card service-featured reveal" data-testid="service-advanced">
                 <div class="service-badge-ribbon">Most Unique</div>
                 <div class="service-card-top">
                     <div class="scard-icon blue"><i class="fas fa-brain"></i></div>
-                    <h3>Advanced Health Support</h3>
-                    <p>Where we truly stand out</p>
+                    <h3>Advanced Health Support</h3><p>Where we truly stand out</p>
                 </div>
                 <ul class="check-list">
                     <li><i class="fas fa-check-circle"></i> PCOS / Diabetes / BP / Cholesterol</li>
@@ -276,11 +315,10 @@
                     <li><i class="fas fa-check-circle"></i> Stress &amp; Cortisol Management</li>
                 </ul>
             </div>
-            <div class="service-card" data-testid="service-coaching">
+            <div class="service-card reveal" data-testid="service-coaching">
                 <div class="service-card-top">
                     <div class="scard-icon green"><i class="fas fa-headset"></i></div>
-                    <h3>High-Touch Coaching</h3>
-                    <p>Handholding, not guesswork</p>
+                    <h3>High-Touch Coaching</h3><p>Handholding, not guesswork</p>
                 </div>
                 <ul class="check-list">
                     <li><i class="fas fa-check-circle"></i> Weekly Video Check-in Calls</li>
@@ -296,154 +334,14 @@
     </div>
 </section>
 
-<!-- ========== WHO IT'S FOR ========== -->
-<section class="section bg-white" id="who" data-testid="who-section">
-    <div class="container">
-        <div class="section-label">Perfect Fit?</div>
-        <h2 class="section-h2">Who This Is <span class="text-blue">Made For</span></h2>
-        <div class="who-grid" data-testid="who-grid">
-            <div class="who-card" data-testid="who-1">
-                <div class="who-icon"><i class="fas fa-briefcase"></i></div>
-                <h4>Busy Professionals</h4>
-                <p>You have a demanding career and can't follow extreme diets or spend hours in the gym every day.</p>
-            </div>
-            <div class="who-card" data-testid="who-2">
-                <div class="who-icon"><i class="fas fa-weight-scale"></i></div>
-                <h4>Struggling with Fat Loss</h4>
-                <p>Tried everything — diets, cardio, gym — but stubborn fat just won't go. You need a new approach.</p>
-            </div>
-            <div class="who-card" data-testid="who-3">
-                <div class="who-icon"><i class="fas fa-person-arrow-up-from-line"></i></div>
-                <h4>Skinny &amp; Want Muscle</h4>
-                <p>Hard gainers who eat everything but can't seem to build any visible muscle mass. We fix that.</p>
-            </div>
-            <div class="who-card" data-testid="who-4">
-                <div class="who-icon"><i class="fas fa-stethoscope"></i></div>
-                <h4>Medical Conditions</h4>
-                <p>Dealing with PCOS, diabetes, thyroid, BP, or cholesterol and need a safe, science-backed approach.</p>
-            </div>
-            <div class="who-card" data-testid="who-5">
-                <div class="who-icon"><i class="fas fa-rotate"></i></div>
-                <h4>Tired of Rebound</h4>
-                <p>Lost weight before but gained it all back? You want results that actually last this time. So do we.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ========== PROCESS SECTION ========== -->
-<section class="section bg-gradient" id="process" data-testid="process-section">
-    <div class="container">
-        <div class="section-label light">How It Works</div>
-        <h2 class="section-h2 white">Your <span class="text-lightblue">3-Step</span> Journey to Transformation</h2>
-        <div class="process-grid" data-testid="process-grid">
-            <div class="process-step" data-testid="process-1">
-                <div class="step-num">01</div>
-                <div class="step-body">
-                    <div class="step-icon"><i class="fas fa-clipboard-list"></i></div>
-                    <h3>Apply &amp; Assess</h3>
-                    <p>Fill the form below. We do a deep-dive into your current health, lifestyle, goals, and medical history. No guessing — we understand you first.</p>
-                </div>
-            </div>
-            <div class="process-arrow" aria-hidden="true"><i class="fas fa-arrow-right"></i></div>
-            <div class="process-step" data-testid="process-2">
-                <div class="step-num">02</div>
-                <div class="step-body">
-                    <div class="step-icon"><i class="fas fa-file-medical"></i></div>
-                    <h3>Get Your Custom Plan</h3>
-                    <p>Receive a fully personalised nutrition + workout plan built around your body, your schedule, and your goals. Not templates — your plan.</p>
-                </div>
-            </div>
-            <div class="process-arrow" aria-hidden="true"><i class="fas fa-arrow-right"></i></div>
-            <div class="process-step" data-testid="process-3">
-                <div class="step-num">03</div>
-                <div class="step-body">
-                    <div class="step-icon"><i class="fas fa-chart-line"></i></div>
-                    <h3>Weekly Coaching &amp; Results</h3>
-                    <p>Weekly check-ins, constant adjustments, and 24/7 support ensure you keep progressing. This is where real transformation happens.</p>
-                </div>
-            </div>
-        </div>
-        <div class="process-cta-wrap" data-testid="process-cta">
-            <a href="#lead-form" class="btn btn-white btn-lg">
-                <i class="fas fa-rocket"></i> Start Your Journey
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- ========== CREDIBILITY / ABOUT ========== -->
-<section class="section bg-white" id="about" data-testid="credibility-section">
-    <div class="container">
-        <div class="cred-grid">
-            <div class="cred-img-col" data-testid="cred-img-col">
-                <div class="cred-img-wrap">
-                    <img src="images/coach/coach_new_2.jpg" alt="Ayush Thakur - Former International Champion & Fitness Coach" class="cred-img" loading="lazy">
-                    <div class="cred-float-badge" data-testid="cred-float-badge">
-                        <i class="fas fa-medal"></i>
-                        <div>
-                            <strong>Former International Champion</strong>
-                            <span>Elite Fitness Coach</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="cred-content-col" data-testid="cred-content">
-                <div class="section-label">Meet Your Coach</div>
-                <h2 class="section-h2">Why <span class="text-blue">Ayush Thakur</span>?</h2>
-                <p class="cred-desc">Not just a fitness coach — a former International Martial Artist who has spent over 9 years transforming hundreds of lives across fat loss, muscle gain, and clinical conditions like PCOS, diabetes, and thyroid.</p>
-                <div class="cred-highlights" data-testid="cred-highlights">
-                    <div class="cred-item">
-                        <div class="cred-icon"><i class="fas fa-trophy"></i></div>
-                        <div>
-                            <strong>Former International Martial Artist</strong>
-                            <p>Competed at international level — discipline, performance &amp; results are in his DNA.</p>
-                        </div>
-                    </div>
-                    <div class="cred-item">
-                        <div class="cred-icon"><i class="fas fa-users"></i></div>
-                        <div>
-                            <strong>500+ Clients Transformed Worldwide</strong>
-                            <p>Real people, real results — not just photos, but measurable health improvements.</p>
-                        </div>
-                    </div>
-                    <div class="cred-item">
-                        <div class="cred-icon"><i class="fas fa-newspaper"></i></div>
-                        <div>
-                            <strong>Featured in Leading Publications</strong>
-                            <p>INC91, Hindustan Bytes, The Daily Beat — one of India's most recognised fitness coaches.</p>
-                        </div>
-                    </div>
-                    <div class="cred-item">
-                        <div class="cred-icon"><i class="fas fa-dna"></i></div>
-                        <div>
-                            <strong>Clinical Conditions Expert</strong>
-                            <p>Specialised in PCOS, diabetes, thyroid, BP — where most coaches stop, we start.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="press-row" data-testid="press-row">
-                    <span class="press-label">As seen in</span>
-                    <a href="https://hindustanbytes.com/ayush-thakur-new-indias-fitness-coach-and-a-former-international-martial-artist" target="_blank" rel="noopener" class="press-pill" data-testid="press-hindustan">Hindustan Bytes</a>
-                    <a href="https://www.thedailybeat.in/ayush-thakur-new-indias-fitness-coach-and-a-former-international-martial-artist" target="_blank" rel="noopener" class="press-pill" data-testid="press-dailybeat">The Daily Beat</a>
-                    <a href="https://share.google/L3KtV7UgBuUgI7GjG" target="_blank" rel="noopener" class="press-pill" data-testid="press-inc91">INC91</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- ========== PHILOSOPHY ========== -->
 <section class="section bg-white" id="philosophy" data-testid="philosophy-section">
     <div class="container">
         <div class="section-label">The ATF Difference</div>
         <h2 class="section-h2">Average Coaching vs <span class="text-blue">The ATF Way</span></h2>
-        <div class="philosophy-wrap" data-testid="philosophy-compare">
-            <div class="philo-col philo-bad" data-testid="philo-bad">
-                <div class="philo-header philo-header-bad">
-                    <i class="fas fa-times-circle"></i>
-                    <h3>Outdated Fitness Methods</h3>
-                </div>
+        <div class="philosophy-wrap reveal" data-testid="philosophy-compare">
+            <div class="philo-col philo-bad">
+                <div class="philo-header philo-header-bad"><i class="fas fa-times-circle"></i><h3>Outdated Fitness Methods</h3></div>
                 <ul>
                     <li><i class="fas fa-times"></i> Fast weight loss &mdash; crash &amp; rebound</li>
                     <li><i class="fas fa-times"></i> Temporary results that never last</li>
@@ -454,12 +352,9 @@
                     <li><i class="fas fa-times"></i> One-size-fits-all approach</li>
                 </ul>
             </div>
-            <div class="philo-vs" aria-hidden="true"><span>VS</span></div>
-            <div class="philo-col philo-good" data-testid="philo-good">
-                <div class="philo-header philo-header-good">
-                    <i class="fas fa-check-circle"></i>
-                    <h3>The ATF Way</h3>
-                </div>
+            <div class="philo-vs"><span>VS</span></div>
+            <div class="philo-col philo-good">
+                <div class="philo-header philo-header-good"><i class="fas fa-check-circle"></i><h3>The ATF Way</h3></div>
                 <ul>
                     <li><i class="fas fa-check"></i> Sustainable fat loss with muscle retention</li>
                     <li><i class="fas fa-check"></i> Results that last for life</li>
@@ -479,56 +374,42 @@
     </div>
 </section>
 
-<!-- ========== OFFER ========== -->
-<section class="section bg-light" id="offer" data-testid="offer-section">
-    <div class="container">
-        <div class="section-label">What You Get</div>
-        <h2 class="section-h2">You're Not Buying a Plan.<br>You're Getting a <span class="text-blue">Complete Transformation Ecosystem.</span></h2>
-        <div class="offer-grid" data-testid="offer-grid">
-            <div class="offer-card" data-testid="offer-diet">
-                <div class="offer-icon"><i class="fas fa-utensils"></i></div>
-                <h4>Personalised Diet + Training</h4>
-                <p>Custom nutrition and workout plans built specifically for your body, goals, and lifestyle. Not templates — your plan.</p>
-            </div>
-            <div class="offer-card" data-testid="offer-coaching">
-                <div class="offer-icon"><i class="fas fa-phone-volume"></i></div>
-                <h4>Weekly Coaching + Adjustments</h4>
-                <p>Regular check-ins to track progress, adjust your plan, and ensure you are always moving forward.</p>
-            </div>
-            <div class="offer-card" data-testid="offer-health">
-                <div class="offer-icon"><i class="fas fa-heart-pulse"></i></div>
-                <h4>Health + Lifestyle Optimisation</h4>
-                <p>Sleep, stress, blood markers, hormones — we address the full picture, not just calories and steps.</p>
-            </div>
-            <div class="offer-card" data-testid="offer-support">
-                <div class="offer-icon"><i class="fas fa-comments"></i></div>
-                <h4>Direct 24/7 Access + Support</h4>
-                <p>Direct access to your coach whenever you need. No waiting. No gatekeepers. Real support when it matters.</p>
-            </div>
+<!-- ========== TIMER + URGENCY OFFER ========== -->
+<section class="section timer-section" id="timer-offer" data-testid="timer-section">
+    <div class="container timer-inner">
+        <div class="timer-badge"><i class="fas fa-bolt"></i> Limited Time Offer</div>
+        <h2 class="timer-h2">Offer Expires In</h2>
+        <div class="timer-display" data-testid="countdown-timer">
+            <div class="timer-block"><span id="t-hours">23</span><small>Hours</small></div>
+            <div class="timer-colon">:</div>
+            <div class="timer-block"><span id="t-mins">59</span><small>Minutes</small></div>
+            <div class="timer-colon">:</div>
+            <div class="timer-block"><span id="t-secs">59</span><small>Seconds</small></div>
         </div>
-        <div class="offer-big-cta" data-testid="offer-big-cta">
-            <h3>If you're serious about transforming your body and keeping it that way — this is for you.</h3>
-            <a href="#lead-form" class="btn btn-primary btn-xl" data-testid="offer-cta-btn">
-                <i class="fas fa-rocket"></i> Apply Now — Limited Spots
-            </a>
-            <p class="offer-note"><i class="fas fa-lock"></i> Applications are reviewed personally by Ayush. Serious applicants only.</p>
+        <div class="timer-price">
+            <s>&#8377;1,999</s>
+            <span class="timer-price-now">&#8377;149 <small>only</small></span>
         </div>
+        <a href="#book-form" class="btn btn-cta-pulse btn-xl" data-testid="timer-cta-btn">
+            <i class="fas fa-calendar-check"></i> Book Consultation for &#8377;149
+        </a>
+        <p class="timer-slots"><i class="fas fa-fire"></i> Only <strong>3 slots left</strong> this week &mdash; don't miss out</p>
     </div>
 </section>
 
-<!-- ========== LEAD FORM ========== -->
-<section class="section bg-gradient-soft" id="lead-form" data-testid="lead-form-section">
+<!-- ========== LEAD FORM (Name + Phone + Email → Razorpay) ========== -->
+<section class="section bg-gradient-soft" id="book-form" data-testid="book-form-section">
     <div class="container">
         <div class="form-grid">
             <div class="form-left" data-testid="form-left">
-                <div class="section-label">Take Action Today</div>
-                <h2 class="form-h2">Start Your Transformation — <span class="text-blue">Apply Now</span></h2>
-                <p class="form-sub">Fill in your details. Our team will reach out personally to discuss your goals, current situation, and how we can help.</p>
+                <div class="section-label">One Step Away</div>
+                <h2 class="form-h2">Book Your ₹149 <span class="text-blue">1:1 Consultation</span></h2>
+                <p class="form-sub">Fill in your details below. You'll be redirected to our secure payment page. After payment, we'll personally reach out to schedule your consultation call.</p>
                 <ul class="form-benefits" data-testid="form-benefits">
-                    <li><i class="fas fa-check"></i> Free initial consultation call</li>
-                    <li><i class="fas fa-check"></i> 100% personalised approach</li>
-                    <li><i class="fas fa-check"></i> No obligation, no pressure</li>
-                    <li><i class="fas fa-check"></i> Response within 24 hours</li>
+                    <li><i class="fas fa-check"></i> Personalised 1:1 coaching call with Ayush</li>
+                    <li><i class="fas fa-check"></i> Custom fat loss / muscle gain roadmap</li>
+                    <li><i class="fas fa-check"></i> Clinical condition guidance (PCOS, diabetes, thyroid)</li>
+                    <li><i class="fas fa-check"></i> Secure payment via Razorpay &mdash; only &#8377;149</li>
                 </ul>
                 <div class="form-testimonials" data-testid="form-testimonials">
                     <div class="ftesti">
@@ -548,8 +429,8 @@
                     <div class="form-card-head">
                         <img src="images/logo.png" alt="ATF" height="44">
                         <div>
-                            <h3>Start Your Application</h3>
-                            <p>We'll respond within 24 hours</p>
+                            <h3>Book Your Consultation</h3>
+                            <p>Only &#8377;149 &mdash; Limited Slots</p>
                         </div>
                     </div>
                     <form id="leadForm" data-testid="lead-form" novalidate>
@@ -560,13 +441,6 @@
                                 <input type="text" id="fname" name="name" placeholder="Your full name" required data-testid="input-name">
                             </div>
                         </div>
-                        <div class="form-group" data-testid="form-group-email">
-                            <label for="femail">Email Address <span class="req">*</span></label>
-                            <div class="inp-wrap">
-                                <i class="fas fa-envelope"></i>
-                                <input type="email" id="femail" name="email" placeholder="your@email.com" required data-testid="input-email">
-                            </div>
-                        </div>
                         <div class="form-group" data-testid="form-group-phone">
                             <label for="fphone">Phone Number <span class="req">*</span></label>
                             <div class="inp-wrap">
@@ -574,24 +448,21 @@
                                 <input type="tel" id="fphone" name="phone" placeholder="+91 98765 43210" required data-testid="input-phone">
                             </div>
                         </div>
-                        <div class="form-group" data-testid="form-group-goal">
-                            <label for="fgoal">Primary Goal</label>
-                            <div class="inp-wrap inp-select">
-                                <i class="fas fa-bullseye"></i>
-                                <select id="fgoal" name="goal" data-testid="input-goal">
-                                    <option value="">Select your goal</option>
-                                    <option value="fat-loss">Fat Loss</option>
-                                    <option value="muscle-gain">Muscle Gain</option>
-                                    <option value="lifestyle">Lifestyle Transformation</option>
-                                    <option value="medical">Medical Condition (PCOS/Diabetes/Thyroid)</option>
-                                    <option value="body-recomp">Body Recomposition</option>
-                                    <option value="other">Other</option>
-                                </select>
+                        <div class="form-group" data-testid="form-group-email">
+                            <label for="femail">Email Address <span class="req">*</span></label>
+                            <div class="inp-wrap">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="femail" name="email" placeholder="your@email.com" required data-testid="input-email">
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-full" id="submitBtn" data-testid="form-submit-btn">
-                            <span id="btnText"><i class="fas fa-paper-plane"></i> Submit Application</span>
-                            <span id="btnLoader" style="display:none"><i class="fas fa-spinner fa-spin"></i> Sending...</span>
+                        <div class="form-price-display" data-testid="form-price-display">
+                            <s>&#8377;1,999</s>
+                            <span>&#8377;149 only</span>
+                            <small><i class="fas fa-lock"></i> Secure Payment via Razorpay</small>
+                        </div>
+                        <button type="submit" class="btn btn-cta-pulse btn-full" id="submitBtn" data-testid="form-submit-btn">
+                            <span id="btnText"><i class="fas fa-calendar-check"></i> Book &amp; Pay &#8377;149</span>
+                            <span id="btnLoader" style="display:none"><i class="fas fa-spinner fa-spin"></i> Processing...</span>
                         </button>
                         <div id="formMsg" class="form-msg" style="display:none;" data-testid="form-message"></div>
                     </form>
@@ -617,11 +488,10 @@
         <div class="footer-col" data-testid="footer-links">
             <h4>Quick Links</h4>
             <ul>
-                <li><a href="#services">Programs</a></li>
-                <li><a href="#process">How It Works</a></li>
-                <li><a href="#transformations">Results</a></li>
+                <li><a href="#results">Transformations</a></li>
                 <li><a href="#about">About Coach</a></li>
-                <li><a href="#lead-form">Apply Now</a></li>
+                <li><a href="#services">Programs</a></li>
+                <li><a href="#book-form">Book &#8377;149</a></li>
             </ul>
         </div>
         <div class="footer-col" data-testid="footer-connect">
@@ -629,7 +499,6 @@
             <ul>
                 <li><a href="https://www.instagram.com/ayushthakurfitness" target="_blank" rel="noopener">@ayushthakurfitness</a></li>
                 <li><a href="https://www.instagram.com/atfelitefit" target="_blank" rel="noopener">@atfelitefit</a></li>
-                <li><a href="https://ayushthakurfitness.com" target="_blank" rel="noopener">ayushthakurfitness.com</a></li>
                 <li><a href="mailto:ayushthakurfitness@gmail.com">ayushthakurfitness@gmail.com</a></li>
                 <li><a href="https://wa.me/917461924657" target="_blank" rel="noopener">WhatsApp: +91 74619 24657</a></li>
             </ul>
@@ -639,6 +508,28 @@
         <p>&copy; 2026 All Rights Reserved. Website Designed &amp; Developed by <a href="https://ashawebtechitsolutions.com/" target="_blank" rel="noopener"><strong>Asha</strong></a> <a href="https://chandrabhansingh.in/" target="_blank" rel="noopener"><strong>WebTech</strong></a> <a href="https://marketingtech.in/" target="_blank" rel="noopener"><strong>IT</strong></a> <a href="https://algotrivo.com/" target="_blank" rel="noopener"><strong>Solutions</strong></a> <a href="https://vanshtechnologies.in/" target="_blank" rel="noopener"><strong>Pvt</strong></a> <a href="https://codetunix.com/" target="_blank" rel="noopener"><strong>Ltd</strong></a></p>
     </div>
 </footer>
+
+<!-- ========== STICKY BOTTOM CTA BAR ========== -->
+<div class="sticky-book-bar" id="stickyBar" data-testid="sticky-book-bar">
+    <div class="sticky-bar-inner">
+        <div class="sticky-bar-price">
+            <s>&#8377;1,999</s>
+            <strong>&#8377;149 <span>only</span></strong>
+        </div>
+        <a href="#book-form" class="btn btn-cta-pulse" data-testid="sticky-bar-cta">
+            <i class="fas fa-calendar-check"></i> Book Consultation &#8377;149
+        </a>
+        <div class="sticky-bar-slots">
+            <i class="fas fa-fire"></i> 3 slots left
+        </div>
+    </div>
+</div>
+
+<!-- ========== SOCIAL PROOF NOTIFICATION ========== -->
+<div class="sp-notification" id="spNotification" data-testid="social-proof-popup" style="display:none;">
+    <div class="sp-dot"></div>
+    <div class="sp-text" id="spText">Priya from Mumbai just booked</div>
+</div>
 
 <!-- Sticky Contact Buttons -->
 <div class="sticky-contact" data-testid="sticky-contact">
