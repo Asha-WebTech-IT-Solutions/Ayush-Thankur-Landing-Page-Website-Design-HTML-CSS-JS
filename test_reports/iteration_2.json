@@ -1,0 +1,46 @@
+{
+  "summary": "Frontend-only VSL overhaul testing for ATF Fitness landing page at /api/website/. 14/16 expected behaviours PASS. Two issues found: (1) Sticky bottom book bar hides too late — only when user scrolls near form top (scrollY > book-form.offsetTop - 100), not when book-form first enters viewport. (2) Mobile sticky bar at scrollY=1500 still hidden because mobile hero is taller; this is acceptable but worth noting. All other VSL elements (urgency banner, viewer bar fluctuation, YouTube embed 6zso3gDedpo, section order, countdown timer decrementing, social proof popup with 'Priya from Mumbai just booked', 3-input lead form without goal dropdown, all CTA pulse buttons → #book-form smooth scroll, Meta Pixel init with ID 891206890606172, form validations, Google Sheets fetch + Razorpay redirect to https://rzp.io/rzp/giR3N1t) are working correctly. Verified Razorpay redirect by intercepting network request — confirmed exact URL 'https://rzp.io/rzp/giR3N1t' fired after valid form submit.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "Sticky bottom book bar",
+        "issue": "Sticky bar disappears too late — only when scrollY > (book-form.offsetTop - 100). Per spec it should disappear when book-form is 'in view' (i.e., when form first enters the viewport bottom). Current behaviour: at scrollY=4766 (form just entered viewport at y=5796 on a 1080px screen), bar is still visible. Bar only hides at scrollY > 5696, by which time the form is already substantially scrolled past the top.",
+        "selector": "[data-testid='sticky-book-bar']",
+        "priority": "MEDIUM"
+      }
+    ],
+    "integration_issues": [
+      {
+        "flow": "Form submit success message visibility",
+        "issue": "The 'Redirecting to secure payment...' message is displayed by JS before the 600ms setTimeout redirect, but in automated tests it can be very briefly visible (depends on Google Sheets fetch round-trip + 600ms). Real users will see it. The redirect itself works correctly (network request to https://rzp.io/rzp/giR3N1t fired and captured). Not a bug — just timing-sensitive in tests.",
+        "affected_selectors": ["[data-testid='form-message']"]
+      }
+    ],
+    "design_issues": []
+  },
+  "test_report_links": ["/app/test_reports/iteration_2.json"],
+  "action_items": [
+    "FIX (MEDIUM): In /app/website/js/script.js initStickyBookBar(), change `const formTop = bookForm ? bookForm.offsetTop - 100 : ...` to use `bookForm.offsetTop - window.innerHeight` (or similar) so the sticky bar hides as soon as the book-form section enters the viewport, not when the user has nearly scrolled to its top. Suggested fix: `const formTop = bookForm ? bookForm.offsetTop - window.innerHeight + 80 : Number.MAX_SAFE_INTEGER;`"
+  ],
+  "critical_code_review_comments": [
+    "Sticky bar offset logic uses `bookForm.offsetTop - 100` which doesn't match the 'when book-form is in view' requirement (see action item).",
+    "Form submit uses fetch with `mode: 'no-cors'` to Google Sheets — fire-and-forget pattern is correct for this use case.",
+    "Razorpay redirect is hard-coded const RAZORPAY_URL = 'https://rzp.io/rzp/giR3N1t' — matches spec.",
+    "Meta Pixel init correctly uses fbq('init', '891206890606172') and tracks Lead + InitiateCheckout on form success.",
+    "All 8 a.btn-cta-pulse anchors point to #book-form — consistent.",
+    "JS file is 463 lines and CSS is 1934 lines; CSS is approaching the 700-line per-module guideline limit and could be split into modules (variables.css, layout.css, components.css, vsl.css).",
+    "Backend not tested per request scope (frontend-only)."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (frontend-only)", "frontend": "94%"},
+  "test_credentials": "None required",
+  "seed_data_creation": "None",
+  "retest_needed": true,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Page loads at https://coaching-ecosystem-1.preview.emergentagent.com/api/website/. All VSL data-testids confirmed: urgency-banner, viewer-bar, youtube-video (iframe with 6zso3gDedpo), results-section, about-section, services-section, philosophy-section, timer-section (with countdown-timer child), book-form-section, sticky-book-bar, social-proof-popup, lead-form (3 inputs only: input-name, input-phone, input-email), form-submit-btn, form-message. Sticky bar uses CSS transform: translateY(100%) to hide and .visible class to show — DO NOT use is_visible() to test it; check class instead. Razorpay redirect verified by intercepting network request via page.route('**/rzp.io/**', abort) and capturing the request URL — confirmed 'https://rzp.io/rzp/giR3N1t'. Form submit via Playwright force-click on #submitBtn previously had issues; using page.evaluate(\"document.getElementById('leadForm').requestSubmit()\") works reliably. Section order: hero(146) → results(1159) → about(2296) → services(3308) → philosophy(4204) → timer(5075) → book-form(5796). Marquee section is between hero and results (separate .marquee-strip element). Mobile 390x844: all VSL elements visible. Heart of any retest: focus on the sticky bar fix only.",
+  "rca of the issue": "Sticky bar bug RCA — File: /app/website/js/script.js, function initStickyBookBar() (lines 444-462). The condition `scrollY < formTop` where `formTop = bookForm.offsetTop - 100` only triggers hide when scrollY surpasses 100px before book-form's top. On a 1080px viewport with book-form at y=5796, the form first becomes visible at scrollY ≈ 4716 (form top enters bottom of viewport), but the sticky bar continues showing until scrollY > 5696 — a ~980px window where the form is partially visible but the bar still overlays it. Fix: use `formTop = bookForm.offsetTop - window.innerHeight + 80` (or similar buffer) so the bar hides as soon as form enters viewport. Reproduction: load page on desktop 1920x1080 → scroll to y=4800 → observe sticky-book-bar still has class 'visible' even though book-form is in view."
+}

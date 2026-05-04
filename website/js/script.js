@@ -4,9 +4,10 @@
    ================================================ */
 
 // ----------------------------------------
-// GOOGLE SHEETS API CONFIGURATION
+// CONFIGURATION
 // ----------------------------------------
 const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwuU0PP9cLILYTKWqwJNBfpf12MA-6a2UVS_fWH09UCkNMBmupSx8jfYhBSvEP8391Kvw/exec';
+const RAZORPAY_URL = 'https://rzp.io/rzp/giR3N1t';
 
 // ----------------------------------------
 // NAVBAR: MOBILE MENU TOGGLE
@@ -199,7 +200,6 @@ if (leadForm) {
         const name = document.getElementById('fname')?.value.trim();
         const email = document.getElementById('femail')?.value.trim();
         const phone = document.getElementById('fphone')?.value.trim();
-        const goal = document.getElementById('fgoal')?.value;
 
         // Basic validation
         if (!name || !email || !phone) {
@@ -208,6 +208,10 @@ if (leadForm) {
         }
         if (!isValidEmail(email)) {
             showFormMsg('Please enter a valid email address.', 'error');
+            return;
+        }
+        if (!isValidPhone(phone)) {
+            showFormMsg('Please enter a valid phone number.', 'error');
             return;
         }
 
@@ -219,10 +223,10 @@ if (leadForm) {
             name,
             email,
             phone,
-            goal: goal || 'Not specified',
+            source: 'ATF Landing Page',
         };
 
-        // Fire and forget to Google Sheets, then always redirect
+        // Fire to Google Sheets, then redirect to Razorpay (success or fail)
         try {
             await fetch(GOOGLE_SHEETS_URL, {
                 method: 'POST',
@@ -231,7 +235,6 @@ if (leadForm) {
                 body: JSON.stringify(payload),
             });
         } catch (err) {
-            // no-cors never throws, but catch just in case
             console.warn('Sheet submission note:', err);
         } finally {
             handleFormSuccess();
@@ -240,24 +243,33 @@ if (leadForm) {
 }
 
 function handleFormSuccess() {
-    setLoading(false);
-
-    // Meta Pixel Lead event
+    // Meta Pixel Lead + InitiateCheckout events
     if (typeof fbq !== 'undefined') {
         fbq('track', 'Lead', {
-            content_name: 'ATF Coaching Application',
+            content_name: 'ATF ₹149 Consultation Lead',
             content_category: 'Fitness Coaching',
+            value: 149,
+            currency: 'INR',
+        });
+        fbq('track', 'InitiateCheckout', {
+            content_name: 'ATF ₹149 Consultation',
+            value: 149,
+            currency: 'INR',
         });
     }
 
-    // Redirect to thank you page
-    window.location.href = 'thankyou.html';
+    showFormMsg('Redirecting to secure payment...', 'success');
+
+    // Small delay so the user sees the success state, then redirect to Razorpay
+    setTimeout(() => {
+        window.location.href = RAZORPAY_URL;
+    }, 600);
 }
 
 function setLoading(isLoading) {
     if (!submitBtn || !btnText || !btnLoader) return;
     submitBtn.disabled = isLoading;
-    btnText.style.display = isLoading ? 'none' : 'flex';
+    btnText.style.display = isLoading ? 'none' : 'inline-flex';
     btnLoader.style.display = isLoading ? 'inline-flex' : 'none';
 }
 
@@ -266,11 +278,17 @@ function showFormMsg(msg, type) {
     formMsg.textContent = msg;
     formMsg.className = `form-msg ${type}`;
     formMsg.style.display = 'block';
-    setTimeout(() => { formMsg.style.display = 'none'; }, 5000);
+    if (type === 'error') {
+        setTimeout(() => { formMsg.style.display = 'none'; }, 5000);
+    }
 }
 
 function isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+function isValidPhone(phone) {
+    const digits = phone.replace(/\D/g, '');
+    return digits.length >= 10 && digits.length <= 15;
 }
 
 // ----------------------------------------
@@ -324,4 +342,122 @@ document.querySelectorAll('.btn-primary').forEach(btn => {
             }
         });
     }
+})();
+
+
+// ====================================================
+// VSL FEATURES — TIMER, SOCIAL PROOF, VIEWER COUNT, STICKY CTA
+// ====================================================
+
+// ---------- COUNTDOWN TIMER (24-hour rolling, persisted via localStorage) ----------
+(function initCountdownTimer() {
+    const hoursEl = document.getElementById('t-hours');
+    const minsEl  = document.getElementById('t-mins');
+    const secsEl  = document.getElementById('t-secs');
+    if (!hoursEl || !minsEl || !secsEl) return;
+
+    const STORAGE_KEY = 'atf_offer_deadline';
+    const DURATION_MS = 24 * 60 * 60 * 1000; // 24 hours
+
+    let deadline = parseInt(localStorage.getItem(STORAGE_KEY), 10);
+    const now = Date.now();
+    if (!deadline || isNaN(deadline) || deadline <= now) {
+        deadline = now + DURATION_MS;
+        localStorage.setItem(STORAGE_KEY, String(deadline));
+    }
+
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+    function tick() {
+        const remaining = Math.max(0, deadline - Date.now());
+        const totalSecs = Math.floor(remaining / 1000);
+        const h = Math.floor(totalSecs / 3600);
+        const m = Math.floor((totalSecs % 3600) / 60);
+        const s = totalSecs % 60;
+        hoursEl.textContent = pad(h);
+        minsEl.textContent  = pad(m);
+        secsEl.textContent  = pad(s);
+
+        if (remaining <= 0) {
+            deadline = Date.now() + DURATION_MS;
+            localStorage.setItem(STORAGE_KEY, String(deadline));
+        }
+    }
+    tick();
+    setInterval(tick, 1000);
+})();
+
+// ---------- LIVE VIEWER COUNT (fluctuating) ----------
+(function initViewerCount() {
+    const el = document.getElementById('viewerCount');
+    if (!el) return;
+    let count = 110 + Math.floor(Math.random() * 40);
+    el.textContent = count;
+    setInterval(() => {
+        const delta = Math.floor(Math.random() * 7) - 3;
+        count = Math.max(95, Math.min(168, count + delta));
+        el.textContent = count;
+    }, 3500);
+})();
+
+// ---------- SOCIAL PROOF POPUP ROTATION ----------
+(function initSocialProofPopup() {
+    const popup = document.getElementById('spNotification');
+    const textEl = document.getElementById('spText');
+    if (!popup || !textEl) return;
+
+    const messages = [
+        '<strong>Priya from Mumbai</strong> just booked',
+        '<strong>Rohit from Bangalore</strong> just booked',
+        '<strong>Aakash from Pune</strong> just booked',
+        '<strong>Sneha from Delhi</strong> just booked',
+        '<strong>Karan from Hyderabad</strong> just booked',
+        '<strong>Aditi from Chennai</strong> just booked',
+        '<strong>Vikas from Lucknow</strong> just booked',
+        '<strong>Neha from Jaipur</strong> just booked',
+        '<strong>Manish from Kolkata</strong> just booked',
+        '<strong>Pooja from Ahmedabad</strong> just booked',
+        '<strong>Sumit from Indore</strong> just booked',
+        '<strong>Riya from Chandigarh</strong> just booked',
+    ];
+
+    let idx = 0;
+    function showNext() {
+        textEl.innerHTML = messages[idx % messages.length];
+        idx++;
+        popup.style.display = 'flex';
+        void popup.offsetWidth;
+        popup.classList.add('show');
+        setTimeout(() => {
+            popup.classList.remove('show');
+            setTimeout(() => { popup.style.display = 'none'; }, 400);
+        }, 4500);
+    }
+
+    setTimeout(() => {
+        showNext();
+        setInterval(showNext, 14000);
+    }, 6000);
+})();
+
+// ---------- STICKY BOTTOM BOOK BAR (visible after hero, hidden near form) ----------
+(function initStickyBookBar() {
+    const stickyBar = document.getElementById('stickyBar');
+    const heroSection = document.getElementById('hero');
+    const bookForm = document.getElementById('book-form');
+    if (!stickyBar || !heroSection) return;
+
+    function updateStickyVisibility() {
+        const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+        const formTop = bookForm ? bookForm.offsetTop - 100 : Number.MAX_SAFE_INTEGER;
+        const scrollY = window.scrollY;
+        if (scrollY > heroBottom && scrollY < formTop) {
+            stickyBar.classList.add('visible');
+        } else {
+            stickyBar.classList.remove('visible');
+        }
+    }
+    window.addEventListener('scroll', updateStickyVisibility, { passive: true });
+    window.addEventListener('resize', updateStickyVisibility);
+    updateStickyVisibility();
 })();
