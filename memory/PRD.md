@@ -61,7 +61,7 @@ A high-converting fitness coaching landing page for "Ayush Thakur Fitness" (ATF)
 
 ## Changelog (this session — Feb 2026)
 - VSL overhaul: replaced static hero image with YouTube video embed
-- Added urgency banner + live viewer bar + sticky bottom CTA + countdown timer + social-proof popup
+- Added urgency banner + sticky bottom CTA + countdown timer + social-proof popup
 - Replaced “Book Now” copy with “Book Consultation for ₹149” across all CTAs
 - Added pulsing/animated CTA style (`btn-cta-pulse`)
 - Reordered: Hero → Results → About (was: Hero → Problem → … → About)
@@ -69,6 +69,17 @@ A high-converting fitness coaching landing page for "Ayush Thakur Fitness" (ATF)
 - Form now redirects to Razorpay instead of thankyou.html
 - Updated Meta Pixel ID to `891206890606172`
 - Added pricing display: ₹1,999 strikethrough → ₹149
+
+### Mobile/UX polish (msg 199)
+- Removed top “people viewing this right now” bar entirely
+- Added “Home” link to nav + mobile menu
+- Removed duplicate hero left-side price/CTA block (price+CTA only on the video card now)
+- Reduced heading sizes ~7-10% (H1 max 4rem, H2 max 2.5rem, form-h2 max 2rem)
+- YouTube embed hides controls/branding/keyboard/fullscreen (`controls=0&modestbranding=1&showinfo=0&iv_load_policy=3&disablekb=1&playsinline=1&fs=0`)
+- Mobile urgency banner: compact single-line, smaller font, hides flame icons on tiny screens
+- Mobile hero-stats: 3 cards in a row (was vertical stack)
+- Mobile CTAs: smaller padding/font (.btn-cta-pulse 0.78rem)
+- Mobile Real Results: centered section + horizontal scroll-snap grid (12 cards in a single scrollable row, 220px each)
 
 ## Backlog / Future Ideas
 - (P2) Replace press pill text with actual publication logo cutouts (user mentioned this in msg 197 — currently still text pills since no logo assets provided)
