@@ -449,7 +449,8 @@ document.querySelectorAll('.btn-primary').forEach(btn => {
 
     function updateStickyVisibility() {
         const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
-        const formTop = bookForm ? bookForm.offsetTop - 100 : Number.MAX_SAFE_INTEGER;
+        // Hide the sticky bar as soon as the book-form section enters the viewport
+        const formTop = bookForm ? bookForm.offsetTop - window.innerHeight + 80 : Number.MAX_SAFE_INTEGER;
         const scrollY = window.scrollY;
         if (scrollY > heroBottom && scrollY < formTop) {
             stickyBar.classList.add('visible');

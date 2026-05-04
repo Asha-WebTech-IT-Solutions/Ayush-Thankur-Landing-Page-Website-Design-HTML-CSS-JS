@@ -1,113 +1,82 @@
-# ATF Fitness Landing Page — PRD
+# Ayush Thakur Fitness — Landing Page PRD
 
-## Project Overview
-**Business**: Ayush Thakur Fitness (ATF)
-**Goal**: High-converting fitness coaching lead generation page
-**Completed**: April 2025
+## Original Problem Statement
+A high-converting fitness coaching landing page for "Ayush Thakur Fitness" (ATF) built in PURE HTML, CSS, and vanilla JavaScript (NO React, NO Tailwind, NO frameworks).
 
----
+## Tech Stack (Locked)
+- Pure HTML5, hand-written CSS (no Tailwind), vanilla JS
+- FastAPI backend serves the static folder at `/api/website/` (so the existing platform routing works)
+- MongoDB present but unused (the form submits to Google Sheets directly from the browser)
 
-## Architecture
-- **Type**: Pure HTML/CSS/Vanilla JS (static website)
-- **Served via**: FastAPI StaticFiles mount at `/api/website/`
-- **Website Folder**: `/app/website/`
-- **Backend**: `/app/backend/server.py` (FastAPI with StaticFiles mount)
+## Folder Structure
+```
+/app/
+├── backend/
+│   └── server.py              # FastAPI: mounts /app/website at /api/website
+├── website/
+│   ├── index.html             # Main landing page
+│   ├── thankyou.html          # Legacy thank-you page (kept; not in current flow)
+│   ├── css/style.css
+│   ├── js/script.js
+│   └── images/                # logo, transformations, coach
+└── memory/
+    ├── PRD.md                 # this file
+    └── test_credentials.md
+```
 
----
+## Page Sequence (Final, VSL Layout)
+1. Urgency banner (top) — “Only 3 slots left this week — 500+ transformed”
+2. Live viewer bar — “127 people are viewing this right now” (fluctuates)
+3. Navbar (sticky) with “Book ₹149” pulsing CTA
+4. **Hero** — H1 + sub + stats + price block (₹1,999 → ₹149) + main CTA  •  YouTube video iframe (`6zso3gDedpo`, autoplay+mute+loop+controls)
+5. Marquee strip (Fat Loss, Muscle Gain, PCOS, etc.)
+6. **Results** (Transformations) — horizontal scroll grid of client photos
+7. CTA strip 1 (light)
+8. **About / Introduction** — coach photo + cred items + press pills (Hindustan Bytes, Daily Beat, INC91)
+9. CTA strip 2 (dark / quote)
+10. **Services** — 3 cards (Core, Advanced Health, High-Touch)
+11. **Philosophy** — Average Coaching vs The ATF Way + quote
+12. **Timer Offer** — Dark section with 24-hour countdown + price + CTA
+13. **Lead Form** — Name + Phone + Email → POST Google Sheets → redirect to Razorpay
+14. Footer (dark)
+15. Sticky bottom “Book Consultation ₹149” bar (visible after hero, hides when form is in view)
+16. Floating social-proof popup “… just booked” (rotates every 14s)
+17. Sticky WhatsApp + Email side buttons
 
-## What's Been Implemented
+## Integrations
+- **Google Sheets** (lead capture): `https://script.google.com/macros/s/AKfycbwuU0PP9cLILYTKWqwJNBfpf12MA-6a2UVS_fWH09UCkNMBmupSx8jfYhBSvEP8391Kvw/exec`
+  - Fire-and-forget POST with `mode: 'no-cors'`
+- **Razorpay** (payment): redirect URL `https://rzp.io/rzp/giR3N1t`
+- **Meta / Facebook Pixel**: ID `891206890606172`
+  - Tracks: PageView, ViewContent (programs/transformations/offer), Contact (form viewed), Lead (form started + form submitted), InitiateCheckout (on submit)
 
-### Pages
-- `index.html` — Main landing page (all sections)
-- `thankyou.html` — Post-form-submission thank you page
+## Form Flow (Final)
+1. User fills Name + Phone + Email
+2. JS validates (required + email regex + phone digits ≥10)
+3. JS POSTs to Google Sheets (no-cors)
+4. JS fires Meta Pixel `Lead` + `InitiateCheckout` (value 149 INR)
+5. JS shows “Redirecting to secure payment…” success message
+6. After 600ms, `window.location.href = RAZORPAY_URL`
+7. Razorpay handles payment + post-payment redirect
 
-### Sections ORDER (index.html)
-1. **Navbar** — Sticky, responsive with mobile hamburger menu
-2. **Hero** — 2-col layout, headline, new taekwondo coach image, floating stat cards, animated counters
-3. **Marquee Ticker** — Infinite CSS animation with fitness topics
-4. **Problem Section** — 4 pain point cards (Why People Fail)
-5. **Transformations** — 12 client photos in scrollable grid (MOVED UP - now 3rd section after problem)
-6. **Services/USP** — 3-column cards (Core, Advanced Health, Coaching)
-7. **Who It's For** — 5 audience segment cards
-8. **Process** — 3-step numbered journey on blue gradient background
-9. **Credibility/About** — New taekwondo coach photo, "Former International Champion" badge, press mentions
-10. **Philosophy** — Side-by-side comparison (Old Way vs ATF Way)
-11. **Offer Section** — 4 offer cards with big CTA
-12. **Lead Form** — Name, Email, Phone, Goal + Google Sheets API + Meta Pixel
-13. **Footer** — Dark, logo, social links, quick links, developer credits
+## Changelog (this session — Feb 2026)
+- VSL overhaul: replaced static hero image with YouTube video embed
+- Added urgency banner + live viewer bar + sticky bottom CTA + countdown timer + social-proof popup
+- Replaced “Book Now” copy with “Book Consultation for ₹149” across all CTAs
+- Added pulsing/animated CTA style (`btn-cta-pulse`)
+- Reordered: Hero → Results → About (was: Hero → Problem → … → About)
+- Lead form simplified to Name + Phone + Email (removed goal dropdown)
+- Form now redirects to Razorpay instead of thankyou.html
+- Updated Meta Pixel ID to `891206890606172`
+- Added pricing display: ₹1,999 strikethrough → ₹149
 
-### Features
-- ✅ Meta Pixel (placeholder `YOUR_PIXEL_ID`) — PageView + Lead events
-- ✅ Google Sheets form integration — LIVE URL configured, redirects to thankyou.html
-- ✅ Form validation + submission → redirect to thankyou.html
-- ✅ Mobile-first responsive design
-- ✅ Scroll reveal animations (IntersectionObserver)
-- ✅ Counter animations (hero stats)
-- ✅ Smooth scroll navigation
-- ✅ Scroll-to-top button
-- ✅ Mobile hamburger menu
-- ✅ All real client transformation images
-- ✅ All real coach photos
-- ✅ ATF logo in navbar, form card, footer
+## Backlog / Future Ideas
+- (P2) Replace press pill text with actual publication logo cutouts (user mentioned this in msg 197 — currently still text pills since no logo assets provided)
+- (P2) Split CSS into modules (variables.css, layout.css, components.css, vsl.css) — file is ~1934 lines
+- (P2) A/B test different hero video thumbnails
+- (P2) Add testimonial video carousel below results
+- (P3) Hindi/English language toggle
 
-### Images Used
-- **Coach Hero**: `images/coach/IMG-20251203-WA0150.jpg`
-- **Coach About**: `images/coach/1.jpg`
-- **Transformations**: 12 photos (Aditya, Ajay, Amrita, Aniket, Ketan, Omkar, Sagar, Sayali, Sristi, Rekha, Ashutosh, Sumeet)
-- **Logo**: `images/logo.png` (ATF circular monogram)
-
----
-
-## Setup Required by Client
-
-### 1. Meta Pixel
-- Find `YOUR_PIXEL_ID` in `index.html` (2 places) and `thankyou.html` (1 place)
-- Replace with actual Pixel ID
-
-### 2. Google Sheets API
-- Follow instructions in `google-sheets-setup.txt`
-- Replace `YOUR_GOOGLE_APPS_SCRIPT_URL` in `js/script.js` line 10
-
-### 3. Upload to Hosting
-- Upload entire `/app/website/` folder contents to `public_html` or `www`
-- All relative paths are configured correctly
-
----
-
-## URLs (Current Preview)
-- Landing Page: `https://coaching-ecosystem-1.preview.emergentagent.com/api/website/`
-- Thank You Page: `https://coaching-ecosystem-1.preview.emergentagent.com/api/website/thankyou.html`
-
----
-
-## Color Theme
-- Primary Blue: `#2563EB`
-- Dark Blue: `#1E3A8A`
-- Light Blue: `#60A5FA`
-- Background: `#FFFFFF`
-- Surface: `#EFF6FF`
-- Text: `#0F172A`
-
-## Fonts
-- Headings: Poppins (400–900)
-- Body: Inter (400–600)
-
----
-
-## Prioritized Backlog
-
-### P0 (Must Do Before Launch)
-- [ ] Replace `YOUR_PIXEL_ID` with actual Meta Pixel ID
-- [ ] Set up Google Apps Script and replace `YOUR_GOOGLE_APPS_SCRIPT_URL`
-- [ ] Add HEIC coach photos (currently only JPG/WebP processed)
-
-### P1 (Soon After Launch)
-- [ ] Add VSL (Video Sales Letter) section when video is ready
-- [ ] Add WhatsApp click-to-chat button (floating)
-- [ ] Add more testimonials section with stars/reviews
-
-### P2 (Nice to Have)
-- [ ] Google Analytics integration
-- [ ] A/B test hero headline variations
-- [ ] Add FAQ section
-- [ ] Blog/content section for SEO
+## Test Status
+- Last test: `/app/test_reports/iteration_2.json` — 94% pass; sticky bar fix re-verified manually after applying patch
+- All VSL flows verified: video embed, countdown, social proof popup, viewer count fluctuation, sticky bar visibility, form → Razorpay redirect, Meta Pixel init, mobile responsiveness
