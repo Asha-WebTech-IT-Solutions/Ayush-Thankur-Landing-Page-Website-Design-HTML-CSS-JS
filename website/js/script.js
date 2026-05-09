@@ -59,7 +59,12 @@ window.addEventListener('scroll', () => {
 // ----------------------------------------
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        const target = document.querySelector(this.getAttribute('href'));
+        let href = this.getAttribute('href');
+        // On mobile, Book Now buttons should scroll to form card directly (not section header)
+        if (href === '#book-form' && window.innerWidth < 1024) {
+            href = '#leadForm';
+        }
+        const target = document.querySelector(href);
         if (target) {
             e.preventDefault();
             const navH = navbar ? navbar.offsetHeight : 72;
@@ -237,20 +242,14 @@ if (leadForm) {
         } catch (err) {
             console.warn('Sheet submission note:', err);
         } finally {
-            handleFormSuccess();
+            handleFormSuccess(name, email, phone);
         }
     });
 }
 
-function handleFormSuccess() {
-    // Meta Pixel Lead + InitiateCheckout events
+function handleFormSuccess(name, email, phone) {
+    // Meta Pixel InitiateCheckout event (form submit is pre-payment step)
     if (typeof fbq !== 'undefined') {
-        fbq('track', 'Lead', {
-            content_name: 'ATF ₹149 Consultation Lead',
-            content_category: 'Fitness Coaching',
-            value: 149,
-            currency: 'INR',
-        });
         fbq('track', 'InitiateCheckout', {
             content_name: 'ATF ₹149 Consultation',
             value: 149,
@@ -260,9 +259,16 @@ function handleFormSuccess() {
 
     showFormMsg('Redirecting to secure payment...', 'success');
 
+    // Build Razorpay URL with pre-filled user details
+    const digits = phone.replace(/\D/g, '');
+    const razorpayUrl = RAZORPAY_URL
+        + '?prefill[name]=' + encodeURIComponent(name)
+        + '&prefill[email]=' + encodeURIComponent(email)
+        + '&prefill[contact]=' + encodeURIComponent(digits);
+
     // Small delay so the user sees the success state, then redirect to Razorpay
     setTimeout(() => {
-        window.location.href = RAZORPAY_URL;
+        window.location.href = razorpayUrl;
     }, 600);
 }
 
@@ -404,27 +410,69 @@ document.querySelectorAll('.btn-primary').forEach(btn => {
 (function initSocialProofPopup() {
     const popup = document.getElementById('spNotification');
     const textEl = document.getElementById('spText');
+    const avatarEl = document.getElementById('spAvatar');
     if (!popup || !textEl) return;
 
-    const messages = [
-        '<strong>Priya from Mumbai</strong> just booked',
-        '<strong>Rohit from Bangalore</strong> just booked',
-        '<strong>Aakash from Pune</strong> just booked',
-        '<strong>Sneha from Delhi</strong> just booked',
-        '<strong>Karan from Hyderabad</strong> just booked',
-        '<strong>Aditi from Chennai</strong> just booked',
-        '<strong>Vikas from Lucknow</strong> just booked',
-        '<strong>Neha from Jaipur</strong> just booked',
-        '<strong>Manish from Kolkata</strong> just booked',
-        '<strong>Pooja from Ahmedabad</strong> just booked',
-        '<strong>Sumit from Indore</strong> just booked',
-        '<strong>Riya from Chandigarh</strong> just booked',
+    const entries = [
+        { name: 'Priya', city: 'Mumbai' },
+        { name: 'Rohit', city: 'Bangalore' },
+        { name: 'Aakash', city: 'Pune' },
+        { name: 'Sneha', city: 'Delhi' },
+        { name: 'Karan', city: 'Hyderabad' },
+        { name: 'Aditi', city: 'Chennai' },
+        { name: 'Vikas', city: 'Lucknow' },
+        { name: 'Neha', city: 'Jaipur' },
+        { name: 'Manish', city: 'Kolkata' },
+        { name: 'Pooja', city: 'Ahmedabad' },
+        { name: 'Sumit', city: 'Indore' },
+        { name: 'Riya', city: 'Chandigarh' },
+        { name: 'Rahul', city: 'Surat' },
+        { name: 'Anjali', city: 'Nagpur' },
+        { name: 'Deepak', city: 'Bhopal' },
+        { name: 'Kavita', city: 'Nashik' },
+        { name: 'Arjun', city: 'Coimbatore' },
+        { name: 'Sonia', city: 'Patna' },
+        { name: 'Gaurav', city: 'Rajkot' },
+        { name: 'Pallavi', city: 'Vadodara' },
+        { name: 'Nitin', city: 'Amritsar' },
+        { name: 'Swati', city: 'Ludhiana' },
+        { name: 'Vikram', city: 'Jodhpur' },
+        { name: 'Geeta', city: 'Agra' },
+        { name: 'Santosh', city: 'Mysuru' },
+        { name: 'Ananya', city: 'Kochi' },
+        { name: 'Ajit', city: 'Kolhapur' },
+        { name: 'Leena', city: 'Thane' },
+        { name: 'Suresh', city: 'Visakhapatnam' },
+        { name: 'Poonam', city: 'Faridabad' },
+        { name: 'Ritesh', city: 'Navi Mumbai' },
+        { name: 'Divya', city: 'Gurgaon' },
+        { name: 'Mohit', city: 'Noida' },
+        { name: 'Shreya', city: 'Vapi' },
+        { name: 'Arun', city: 'Madurai' },
+        { name: 'Nandini', city: 'Mysore' },
+        { name: 'Harish', city: 'Mangalore' },
+        { name: 'Meera', city: 'Trivandrum' },
+        { name: 'Tarun', city: 'Guwahati' },
+        { name: 'Preeti', city: 'Raipur' },
     ];
+
+    // Avatar colours cycle
+    const avatarColors = [
+        '#2563EB','#DC2626','#16A34A','#D97706','#7C3AED','#0891B2','#BE185D'
+    ];
+    let colorIdx = 0;
 
     let idx = 0;
     function showNext() {
-        textEl.innerHTML = messages[idx % messages.length];
+        const entry = entries[idx % entries.length];
         idx++;
+        const initial = entry.name.charAt(0).toUpperCase();
+        if (avatarEl) {
+            avatarEl.textContent = initial;
+            avatarEl.style.background = avatarColors[colorIdx % avatarColors.length];
+            colorIdx++;
+        }
+        textEl.innerHTML = '<strong>' + entry.name + ' from ' + entry.city + '</strong> just booked a slot!';
         popup.style.display = 'flex';
         void popup.offsetWidth;
         popup.classList.add('show');

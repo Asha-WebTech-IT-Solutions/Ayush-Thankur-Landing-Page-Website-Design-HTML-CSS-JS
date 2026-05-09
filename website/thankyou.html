@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Application Received | Ayush Thakur Fitness</title>
+    <title>Payment Successful | Ayush Thakur Fitness</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
@@ -19,7 +19,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- Meta Pixel Code -->
+    <!-- Meta Pixel Code — Fires on final conversion (post-payment) -->
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -29,14 +29,192 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window,document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', 'YOUR_PIXEL_ID');
+    fbq('init', '891206890606172');
     fbq('track', 'PageView');
-    fbq('track', 'Lead');
+    fbq('track', 'Purchase', {
+        value: 149,
+        currency: 'INR',
+        content_name: 'ATF ₹149 Consultation',
+        content_category: 'Fitness Coaching'
+    });
     </script>
     <noscript>
         <img height="1" width="1" style="display:none"
-        src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=Lead&noscript=1"/>
+        src="https://www.facebook.com/tr?id=891206890606172&ev=Purchase&noscript=1"/>
     </noscript>
+
+    <style>
+        /* ---- Thank You Page Specific Styles ---- */
+        .ty-page {
+            background: linear-gradient(135deg, #EFF6FF 0%, #F0FDF4 50%, #EFF6FF 100%);
+            min-height: 100vh;
+        }
+        .ty-main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 80px);
+            padding: 2rem 1rem 3rem;
+        }
+        .ty-card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 25px 70px rgba(37,99,235,0.15);
+            border: 1px solid #BFDBFE;
+            max-width: 520px;
+            width: 100%;
+            text-align: center;
+        }
+        .ty-icon-wrap {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+        }
+        .ty-icon {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, #16A34A, #22C55E);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(34,197,94,0.35);
+            animation: successPop 0.5s cubic-bezier(0.175,0.885,0.32,1.275) both;
+        }
+        @keyframes successPop {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .ty-h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            font-weight: 800;
+            color: #0F172A;
+            margin-bottom: 0.75rem;
+        }
+        .ty-h1 span { color: #16A34A; }
+        .ty-msg {
+            font-size: 0.97rem;
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        .ty-details {
+            background: #F8FAFC;
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .ty-detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            font-size: 0.9rem;
+            color: #334155;
+            font-weight: 500;
+        }
+        .ty-detail-item i.fa-check-circle { color: #16A34A; }
+        .ty-detail-item i.fa-clock { color: #2563EB; }
+        .ty-detail-item i.fa-phone { color: #2563EB; }
+
+        /* ---- CTA Action Buttons ---- */
+        .ty-action-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            margin-bottom: 1.75rem;
+        }
+        .ty-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.65rem;
+            padding: 0.9rem 1.5rem;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+            border: none;
+        }
+        .ty-btn:hover {
+            transform: translateY(-2px);
+        }
+        .ty-btn-wa {
+            background: linear-gradient(135deg, #22C55E, #16A34A);
+            color: #fff;
+            box-shadow: 0 8px 25px rgba(34,197,94,0.4);
+        }
+        .ty-btn-wa:hover { box-shadow: 0 12px 30px rgba(34,197,94,0.5); }
+        .ty-btn-call {
+            background: linear-gradient(135deg, #2563EB, #1D4ED8);
+            color: #fff;
+            box-shadow: 0 8px 25px rgba(37,99,235,0.4);
+        }
+        .ty-btn-call:hover { box-shadow: 0 12px 30px rgba(37,99,235,0.5); }
+        .ty-btn i { font-size: 1.1rem; }
+        .ty-btn-label { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2; }
+        .ty-btn-label small { font-size: 0.7rem; font-weight: 400; opacity: 0.85; }
+
+        /* ---- Social Section ---- */
+        .ty-social-section {
+            border-top: 1px solid #E2E8F0;
+            padding-top: 1.25rem;
+            margin-bottom: 1.25rem;
+        }
+        .ty-social-label {
+            font-size: 0.85rem;
+            color: #94A3B8;
+            margin-bottom: 0.75rem;
+        }
+        .ty-social-btns {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .ty-social-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #E8F3FF, #F0E8FF);
+            text-decoration: none;
+            color: #2563EB;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid #BFDBFE;
+            transition: transform 0.2s ease;
+        }
+        .ty-social-btn:hover { transform: translateY(-2px); }
+        .ty-social-btn i { font-size: 0.9rem; }
+        .ty-back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #64748B;
+            font-size: 0.85rem;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+        }
+        .ty-back-btn:hover { color: #2563EB; }
+        .ty-footer {
+            background: #0F172A;
+            color: #94A3B8;
+            text-align: center;
+            padding: 1.25rem;
+            font-size: 0.8rem;
+        }
+    </style>
 </head>
 <body class="ty-page">
     <nav class="navbar" data-testid="ty-navbar">
@@ -55,47 +233,97 @@
                     <i class="fas fa-check"></i>
                 </div>
             </div>
-            <h1 class="ty-h1" data-testid="ty-heading">Application Received!</h1>
+            <h1 class="ty-h1" data-testid="ty-heading">Payment <span>Successful!</span></h1>
             <p class="ty-msg" data-testid="ty-message">
-                Your application has been received. Our team will contact you within <strong>24 hours</strong> to discuss your transformation goals.
+                Your ₹149 consultation has been booked. <strong>Ayush will personally reach out within 24 hours</strong> to schedule your 1:1 coaching call.
             </p>
             <div class="ty-details" data-testid="ty-details">
                 <div class="ty-detail-item">
                     <i class="fas fa-check-circle"></i>
-                    <span>Application submitted successfully</span>
+                    <span>Payment received &amp; confirmed</span>
                 </div>
                 <div class="ty-detail-item">
                     <i class="fas fa-clock"></i>
-                    <span>Response within 24 hours</span>
+                    <span>Consultation call within 24 hours</span>
                 </div>
                 <div class="ty-detail-item">
                     <i class="fas fa-phone"></i>
-                    <span>Personal consultation call scheduled</span>
+                    <span>Personalised plan prepared for you</span>
                 </div>
             </div>
+
+            <!-- WhatsApp + Call CTAs (tracked as conversions) -->
+            <div class="ty-action-btns" data-testid="ty-action-btns">
+                <a href="https://wa.me/917461924657?text=Hi%20Ayush%2C%20I%20just%20booked%20my%20%E2%82%B9149%20consultation.%20Looking%20forward%20to%20connecting!" 
+                   target="_blank" rel="noopener"
+                   class="ty-btn ty-btn-wa"
+                   id="ty-whatsapp-btn"
+                   data-testid="ty-whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i>
+                    <div class="ty-btn-label">
+                        <span>Message on WhatsApp</span>
+                        <small>Say hi to Ayush directly</small>
+                    </div>
+                </a>
+                <a href="tel:+917461924657"
+                   class="ty-btn ty-btn-call"
+                   id="ty-call-btn"
+                   data-testid="ty-call-btn">
+                    <i class="fas fa-phone"></i>
+                    <div class="ty-btn-label">
+                        <span>Call Now: +91 74619 24657</span>
+                        <small>Mon – Sat, 9 AM – 8 PM IST</small>
+                    </div>
+                </a>
+            </div>
+
             <div class="ty-social-section" data-testid="ty-social">
-                <p class="ty-social-label">Follow us while you wait:</p>
+                <p class="ty-social-label">Follow Ayush for daily tips &amp; motivation:</p>
                 <div class="ty-social-btns">
                     <a href="https://www.instagram.com/ayushthakurfitness" target="_blank" rel="noopener" class="ty-social-btn" data-testid="ty-insta-personal">
                         <i class="fab fa-instagram"></i>
                         <span>@ayushthakurfitness</span>
-                        <small>Personal Journey</small>
                     </a>
                     <a href="https://www.instagram.com/atfelitefit" target="_blank" rel="noopener" class="ty-social-btn" data-testid="ty-insta-atf">
                         <i class="fab fa-instagram"></i>
                         <span>@atfelitefit</span>
-                        <small>ATF Elite Fit</small>
                     </a>
                 </div>
             </div>
-            <a href="index.html" class="btn btn-outline ty-back-btn" data-testid="ty-back-btn">
+            <a href="index.html" class="ty-back-btn" data-testid="ty-back-btn">
                 <i class="fas fa-arrow-left"></i> Back to Home
             </a>
         </div>
     </main>
 
     <footer class="ty-footer" data-testid="ty-footer">
-        <p>&copy; 2025 Ayush Thakur Fitness. All rights reserved.</p>
+        <p>&copy; 2026 Ayush Thakur Fitness. All rights reserved.</p>
     </footer>
+
+    <script>
+    // Track WhatsApp click as Lead conversion
+    document.getElementById('ty-whatsapp-btn').addEventListener('click', function() {
+        if (typeof fbq !== 'undefined') {
+            fbq('track', 'Lead', {
+                content_name: 'WhatsApp CTA - Thank You Page',
+                content_category: 'Fitness Coaching',
+                value: 149,
+                currency: 'INR'
+            });
+        }
+    });
+
+    // Track Call click as Lead conversion
+    document.getElementById('ty-call-btn').addEventListener('click', function() {
+        if (typeof fbq !== 'undefined') {
+            fbq('track', 'Lead', {
+                content_name: 'Call CTA - Thank You Page',
+                content_category: 'Fitness Coaching',
+                value: 149,
+                currency: 'INR'
+            });
+        }
+    });
+    </script>
 </body>
 </html>

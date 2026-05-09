@@ -33,9 +33,9 @@
 
 <!-- ========== URGENCY BANNER ========== -->
 <div class="urgency-banner" data-testid="urgency-banner">
-    <i class="fas fa-fire"></i>
-    Only <strong>3 consultation slots</strong> left this week &mdash; <strong>500+</strong> clients already transformed
-    <i class="fas fa-fire"></i>
+    <i class="fas fa-fire urgency-icon-left"></i>
+    <span class="urgency-scroll">Only <strong>3 consultation slots</strong> left this week &mdash; <strong>500+</strong> clients already transformed</span>
+    <i class="fas fa-fire urgency-icon-right"></i>
 </div>
 
 <!-- ========== VIEWER COUNT BAR (removed per client request) ========== -->
@@ -112,14 +112,10 @@
         <div class="hero-video-col" data-testid="hero-video-col">
             <div class="video-frame">
                 <div class="video-badge-top">Watch Ayush Explain the System</div>
-                <div class="video-wrap" data-testid="youtube-video">
-                    <iframe
-                        src="https://www.youtube.com/embed/6zso3gDedpo?autoplay=1&mute=1&loop=1&playlist=6zso3gDedpo&controls=0&rel=0&modestbranding=1&showinfo=0&iv_load_policy=3&disablekb=1&playsinline=1&fs=0"
-                        title="Ayush Thakur Fitness - Transformation System"
-                        frameborder="0"
-                        allow="autoplay; encrypted-media; picture-in-picture"
-                        loading="lazy"
-                    ></iframe>
+                <div class="video-wrap" data-testid="hero-video">
+                    <video autoplay muted loop playsinline webkit-playsinline>
+                        <source src="https://atf.ayushthakurfitness.com/video.mov" type="video/mp4">
+                    </video>
                 </div>
                 <div class="video-cta-below">
                     <div class="price-row-sm">
@@ -179,6 +175,7 @@
                 <div class="t-card" data-testid="t-rekha"><img src="images/transformations/Rekha.jpg" alt="Rekha Transformation" loading="lazy"><div class="t-overlay"><span>Rekha</span></div></div>
                 <div class="t-card" data-testid="t-ashutosh"><img src="images/transformations/Ashutosh.jpg" alt="Ashutosh Transformation" loading="lazy"><div class="t-overlay"><span>Ashutosh</span></div></div>
                 <div class="t-card" data-testid="t-sumeet"><img src="images/transformations/Sumeet.jpg" alt="Sumeet Transformation" loading="lazy"><div class="t-overlay"><span>Sumeet</span></div></div>
+                <div class="t-card" data-testid="t-rohan"><img src="images/transformations/Rohan raut.jpg" alt="Rohan Transformation" loading="lazy"><div class="t-overlay"><span>Rohan</span></div></div>
             </div>
         </div>
     </div>
@@ -394,20 +391,8 @@
                     <li><i class="fas fa-check"></i> Clinical condition guidance (PCOS, diabetes, thyroid)</li>
                     <li><i class="fas fa-check"></i> Secure payment via Razorpay &mdash; only &#8377;149</li>
                 </ul>
-                <div class="form-testimonials" data-testid="form-testimonials">
-                    <div class="ftesti">
-                        <div class="ftesti-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p>"Best coaching decision of my life. Lost 12kg in 3 months."</p>
-                        <span>— Aditya, Pune</span>
-                    </div>
-                    <div class="ftesti">
-                        <div class="ftesti-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p>"My PCOS is finally under control. No starvation, just a real system."</p>
-                        <span>— Rekha, Mumbai</span>
-                    </div>
-                </div>
             </div>
-            <div class="form-right" data-testid="form-right">
+            <div class="form-right" data-testid="form-right" id="form-right">
                 <div class="form-card">
                     <div class="form-card-head">
                         <img src="images/logo.png" alt="ATF" height="44">
@@ -449,6 +434,18 @@
                         </button>
                         <div id="formMsg" class="form-msg" style="display:none;" data-testid="form-message"></div>
                     </form>
+                </div>
+            </div>
+            <div class="form-testimonials" data-testid="form-testimonials">
+                <div class="ftesti">
+                    <div class="ftesti-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"Best coaching decision of my life. Lost 12kg in 3 months."</p>
+                    <span>— Aditya, Pune</span>
+                </div>
+                <div class="ftesti">
+                    <div class="ftesti-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"My PCOS is finally under control. No starvation, just a real system."</p>
+                    <span>— Rekha, Mumbai</span>
                 </div>
             </div>
         </div>
@@ -510,8 +507,11 @@
 
 <!-- ========== SOCIAL PROOF NOTIFICATION ========== -->
 <div class="sp-notification" id="spNotification" data-testid="social-proof-popup" style="display:none;">
-    <div class="sp-dot"></div>
-    <div class="sp-text" id="spText">Priya from Mumbai just booked</div>
+    <div class="sp-avatar" id="spAvatar">P</div>
+    <div class="sp-body">
+        <div class="sp-text" id="spText">Priya from Mumbai just booked</div>
+        <div class="sp-meta"><span class="sp-dot"></span><span class="sp-time">Just now</span></div>
+    </div>
 </div>
 
 <!-- Sticky Contact Buttons -->
