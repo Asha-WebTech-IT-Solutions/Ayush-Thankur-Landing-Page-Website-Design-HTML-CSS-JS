@@ -59,7 +59,16 @@ A high-converting fitness coaching landing page for "Ayush Thakur Fitness" (ATF)
 6. After 600ms, `window.location.href = RAZORPAY_URL`
 7. Razorpay handles payment + post-payment redirect
 
-## Changelog (this session — Feb 2026)
+## Changelog (this session — May 2026)
+- **Video**: Replaced YouTube iframe with HTML5 `<video>` pointing to `https://atf.ayushthakurfitness.com/video.mov`
+- **Book Now mobile**: Clicking "Book Now" on mobile now scrolls directly to `#leadForm` (the form card), not the section header "One Step Away"
+- **Social proof popup**: Expanded from 12 to 40+ names/cities; added avatar circle with initial + colour cycling; shows "Just now" meta; improved card design
+- **Urgency banner**: Desktop — single line static; Mobile — ticker/marquee scrolling animation (right-to-left)
+- **Form layout**: Testimonials moved outside `form-left` as a separate CSS grid item; on desktop they appear below the heading column, on mobile they appear AFTER the form card (not before)
+- **Thank you page**: Fixed Pixel ID (`YOUR_PIXEL_ID` → `891206890606172`); now fires `Purchase` (final conversion) + `PageView`; added WhatsApp + Call CTAs both tracked as `Lead` events; title changed to "Payment Successful!"
+- **Form Pixel**: Form submit now fires only `InitiateCheckout` (not `Lead`); WhatsApp/Call on thank-you page fire `Lead`
+- **Razorpay prefill**: Form submit now builds URL with `prefill[name]`, `prefill[email]`, `prefill[contact]` query params
+- **Real Results**: Added Rohan Raut transformation photo to the grid
 - VSL overhaul: replaced static hero image with YouTube video embed
 - Added urgency banner + sticky bottom CTA + countdown timer + social-proof popup
 - Replaced “Book Now” copy with “Book Consultation for ₹149” across all CTAs
