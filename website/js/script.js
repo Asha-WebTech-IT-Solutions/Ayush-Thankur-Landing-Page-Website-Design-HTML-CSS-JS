@@ -7,7 +7,8 @@
 // CONFIGURATION
 // ----------------------------------------
 const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwuU0PP9cLILYTKWqwJNBfpf12MA-6a2UVS_fWH09UCkNMBmupSx8jfYhBSvEP8391Kvw/exec';
-const RAZORPAY_URL = 'https://rzp.io/rzp/giR3N1t';
+// Use full Razorpay payment page URL (NOT the short rzp.io link — prefill params are dropped by short URL redirects)
+const RAZORPAY_URL = 'https://pages.razorpay.com/pl_ShGye4YSFY4899/view';
 
 // ----------------------------------------
 // NAVBAR: MOBILE MENU TOGGLE
@@ -259,12 +260,20 @@ function handleFormSuccess(name, email, phone) {
 
     showFormMsg('Redirecting to secure payment...', 'success');
 
-    // Build Razorpay URL with pre-filled user details
-    const digits = phone.replace(/\D/g, '');
+    // Build Razorpay prefill URL
+    // Strip non-digits, then remove leading country code (91) if present to get 10-digit number
+    let digits = phone.replace(/\D/g, '');
+    if (digits.length === 12 && digits.startsWith('91')) {
+        digits = digits.slice(2);      // 917024315567 → 7024315567
+    } else if (digits.length === 11 && digits.startsWith('0')) {
+        digits = digits.slice(1);      // 07024315567 → 7024315567
+    }
+
+    // Razorpay payment page prefill format: name=, email=, contact= (10-digit)
     const razorpayUrl = RAZORPAY_URL
-        + '?prefill[name]=' + encodeURIComponent(name)
-        + '&prefill[email]=' + encodeURIComponent(email)
-        + '&prefill[contact]=' + encodeURIComponent(digits);
+        + '?name='    + encodeURIComponent(name)
+        + '&email='   + encodeURIComponent(email)
+        + '&contact=' + encodeURIComponent(digits);
 
     // Small delay so the user sees the success state, then redirect to Razorpay
     setTimeout(() => {
