@@ -7,9 +7,7 @@
 // CONFIGURATION
 // ----------------------------------------
 const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwuU0PP9cLILYTKWqwJNBfpf12MA-6a2UVS_fWH09UCkNMBmupSx8jfYhBSvEP8391Kvw/exec';
-// Use full Razorpay payment page URL (NOT the short rzp.io link — prefill params are dropped by short URL redirects)
-// Trailing slash is required for query params to work correctly
-const RAZORPAY_URL = 'https://pages.razorpay.com/pl_ShGye4YSFY4899/view/';
+const RAZORPAY_URL = 'https://pages.razorpay.com/pl_ShGye4YSFY4899/view';
 
 // ----------------------------------------
 // NAVBAR: MOBILE MENU TOGGLE
