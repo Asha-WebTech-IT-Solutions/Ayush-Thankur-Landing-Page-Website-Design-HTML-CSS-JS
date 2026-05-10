@@ -8,7 +8,8 @@
 // ----------------------------------------
 const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwuU0PP9cLILYTKWqwJNBfpf12MA-6a2UVS_fWH09UCkNMBmupSx8jfYhBSvEP8391Kvw/exec';
 // Use full Razorpay payment page URL (NOT the short rzp.io link — prefill params are dropped by short URL redirects)
-const RAZORPAY_URL = 'https://pages.razorpay.com/pl_ShGye4YSFY4899/view';
+// Trailing slash is required for query params to work correctly
+const RAZORPAY_URL = 'https://pages.razorpay.com/pl_ShGye4YSFY4899/view/';
 
 // ----------------------------------------
 // NAVBAR: MOBILE MENU TOGGLE
@@ -260,8 +261,7 @@ function handleFormSuccess(name, email, phone) {
 
     showFormMsg('Redirecting to secure payment...', 'success');
 
-    // Build Razorpay prefill URL
-    // Strip non-digits, then remove leading country code (91) if present to get 10-digit number
+    // Normalize phone: strip non-digits, remove leading 91 (country code) or 0
     let digits = phone.replace(/\D/g, '');
     if (digits.length === 12 && digits.startsWith('91')) {
         digits = digits.slice(2);      // 917024315567 → 7024315567
@@ -269,11 +269,16 @@ function handleFormSuccess(name, email, phone) {
         digits = digits.slice(1);      // 07024315567 → 7024315567
     }
 
-    // Razorpay payment page prefill format: name=, email=, contact= (10-digit)
-    const razorpayUrl = RAZORPAY_URL
-        + '?name='    + encodeURIComponent(name)
-        + '&email='   + encodeURIComponent(email)
-        + '&contact=' + encodeURIComponent(digits);
+    // Razorpay Payment Page prefill — correct parameter names:
+    //   full_name (NOT name), phone (NOT contact), email (unchanged)
+    const params = new URLSearchParams({
+        full_name : name,
+        email     : email,
+        phone     : digits,
+    });
+    const razorpayUrl = RAZORPAY_URL + '?' + params.toString();
+
+    console.log('[ATF] Redirecting to:', razorpayUrl);
 
     // Small delay so the user sees the success state, then redirect to Razorpay
     setTimeout(() => {
