@@ -573,72 +573,63 @@ document.querySelectorAll('.btn-primary').forEach(btn => {
     observer.observe(bookFormSection);
 })();
 
-// ---------- DRAG-TO-SCROLL FOR TRANSFORMATION GRID ----------
+// ---------- DRAG-TO-SCROLL FOR TRANSFORMATION GRIDS ----------
 (function initDragScroll() {
-    const grid = document.getElementById('transformGrid');
-    if (!grid) return;
-    const wrapper = grid.parentElement; // .transform-scroll-wrapper has overflow-x: auto
-    if (!wrapper) return;
-    let isDown = false, startX, scrollLeft;
-    wrapper.addEventListener('mousedown', (e) => {
-        isDown = true;
-        grid.classList.add('dragging');
-        startX = e.pageX - wrapper.offsetLeft;
-        scrollLeft = wrapper.scrollLeft;
-    });
-    wrapper.addEventListener('mouseleave', () => { isDown = false; grid.classList.remove('dragging'); });
-    wrapper.addEventListener('mouseup', () => { isDown = false; grid.classList.remove('dragging'); });
-    wrapper.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - wrapper.offsetLeft;
-        const walk = (x - startX) * 1.5;
-        wrapper.scrollLeft = scrollLeft - walk;
+    ['transformGrid', 'transformGrid2'].forEach(function(id) {
+        const grid = document.getElementById(id);
+        if (!grid) return;
+        const wrapper = grid.parentElement;
+        if (!wrapper) return;
+        let isDown = false, startX, scrollLeft;
+        wrapper.addEventListener('mousedown', (e) => {
+            isDown = true;
+            grid.classList.add('dragging');
+            startX = e.pageX - wrapper.offsetLeft;
+            scrollLeft = wrapper.scrollLeft;
+        });
+        wrapper.addEventListener('mouseleave', () => { isDown = false; grid.classList.remove('dragging'); });
+        wrapper.addEventListener('mouseup', () => { isDown = false; grid.classList.remove('dragging'); });
+        wrapper.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - wrapper.offsetLeft;
+            wrapper.scrollLeft = scrollLeft - (x - startX) * 1.5;
+        });
     });
 })();
 
 // ---------- TRANSFORMATION PHOTO LIGHTBOX ----------
 (function initLightbox() {
-    const overlay = document.getElementById('lightboxOverlay');
-    const img     = document.getElementById('lightboxImg');
-    const caption = document.getElementById('lightboxCaption');
-    const closeBtn= document.getElementById('lightboxClose');
-    if (!overlay) return;
+    const overlay  = document.getElementById('lightboxOverlay');
+    const imgEl    = document.getElementById('lightboxImg');
+    const caption  = document.getElementById('lightboxCaption');
+    const closeBtn = document.getElementById('lightboxClose');
+    if (!overlay || !imgEl) return;
 
-    // Open on t-card click — but only if not dragging
-    let dragDistance = 0;
-    const grid = document.getElementById('transformGrid');
-    const wrapper = grid ? grid.parentElement : null;
-    if (wrapper) {
-        wrapper.addEventListener('mousedown', () => { dragDistance = 0; });
-        wrapper.addEventListener('mousemove', () => { dragDistance++; });
+    function openLightbox(src, name) {
+        imgEl.src = src;
+        imgEl.alt = name + ' Transformation';
+        caption.textContent = name + ' — Transformation Result';
+        overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
     }
 
+    function closeLightbox() {
+        overlay.style.display = 'none';
+        document.body.style.overflow = '';
+        imgEl.src = '';
+    }
+
+    // Attach to all cards in both grids
     document.querySelectorAll('.t-card[data-lb-img]').forEach(card => {
-        // Support both click (desktop) and touchend (mobile)
-        const openLightbox = (e) => {
-            if (dragDistance > 5) return; // was a drag, not a tap/click
-            e.preventDefault();
-            const src  = card.getAttribute('data-lb-img');
-            const name = card.getAttribute('data-lb-name') || '';
-            img.src = src;
-            img.alt = name + ' Transformation';
-            caption.textContent = name + ' — Transformation Result';
-            overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        };
-        card.addEventListener('click', openLightbox);
-        card.addEventListener('touchend', (e) => {
-            dragDistance = 0; // reset drag counter on touch end — touch scroll handled by browser
-            openLightbox(e);
+        card.addEventListener('click', function() {
+            openLightbox(
+                this.getAttribute('data-lb-img'),
+                this.getAttribute('data-lb-name') || ''
+            );
         });
     });
 
-    function closeLightbox() {
-        overlay.classList.remove('active');
-        document.body.style.overflow = '';
-        setTimeout(() => { img.src = ''; }, 300);
-    }
     closeBtn.addEventListener('click', closeLightbox);
     overlay.addEventListener('click', (e) => { if (e.target === overlay) closeLightbox(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
