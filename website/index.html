@@ -93,17 +93,17 @@
             </p>
             <div class="hero-stats" data-testid="hero-stats">
                 <div class="stat">
-                    <span class="stat-num" data-target="9">0</span><span class="stat-suffix">+</span>
+                    <div class="stat-top"><span class="stat-num" data-target="9">0</span><span class="stat-suffix">+</span></div>
                     <span class="stat-lbl">Years Experience</span>
                 </div>
                 <div class="stat-sep"></div>
                 <div class="stat">
-                    <span class="stat-num" data-target="500">0</span><span class="stat-suffix">+</span>
+                    <div class="stat-top"><span class="stat-num" data-target="500">0</span><span class="stat-suffix">+</span></div>
                     <span class="stat-lbl">Lives Changed</span>
                 </div>
                 <div class="stat-sep"></div>
                 <div class="stat">
-                    <span class="stat-num" data-target="100">0</span><span class="stat-suffix">%</span>
+                    <div class="stat-top"><span class="stat-num" data-target="100">0</span><span class="stat-suffix">%</span></div>
                     <span class="stat-lbl">Personalised</span>
                 </div>
             </div>
@@ -113,8 +113,8 @@
             <div class="video-frame">
                 <div class="video-badge-top">Watch Ayush Explain the System</div>
                 <div class="video-wrap" data-testid="hero-video">
-                    <video autoplay muted loop playsinline webkit-playsinline>
-                        <source src="https://atf.ayushthakurfitness.com/video.mov" type="video/mp4">
+                    <video controls playsinline webkit-playsinline preload="metadata">
+                        <source src="https://atf.ayushthakurfitness.com/video.mp4" type="video/mp4">
                     </video>
                 </div>
                 <div class="video-cta-below">
@@ -162,20 +162,20 @@
         <h2 class="section-h2">Real People. <span class="text-blue">Real Transformations.</span></h2>
         <p class="section-sub">Not just weight loss — complete body recomposition, health improvement, and lifestyle change.</p>
         <div class="transform-scroll-wrapper" data-testid="transformation-scroll">
-            <div class="transform-grid" data-testid="transformation-grid">
-                <div class="t-card" data-testid="t-aditya"><img src="images/transformations/Aditya.jpg" alt="Aditya Transformation" loading="lazy"><div class="t-overlay"><span>Aditya</span></div></div>
-                <div class="t-card" data-testid="t-ajay"><img src="images/transformations/Ajay.jpg" alt="Ajay Transformation" loading="lazy"><div class="t-overlay"><span>Ajay</span></div></div>
-                <div class="t-card" data-testid="t-amrita"><img src="images/transformations/Amrita.jpg" alt="Amrita Transformation" loading="lazy"><div class="t-overlay"><span>Amrita</span></div></div>
-                <div class="t-card" data-testid="t-aniket"><img src="images/transformations/Aniket.jpg" alt="Aniket Transformation" loading="lazy"><div class="t-overlay"><span>Aniket</span></div></div>
-                <div class="t-card" data-testid="t-ketan"><img src="images/transformations/Ketan.jpg" alt="Ketan Transformation" loading="lazy"><div class="t-overlay"><span>Ketan</span></div></div>
-                <div class="t-card" data-testid="t-omkar"><img src="images/transformations/Omkar.jpg" alt="Omkar Transformation" loading="lazy"><div class="t-overlay"><span>Omkar</span></div></div>
-                <div class="t-card" data-testid="t-sagar"><img src="images/transformations/Sagar.jpg" alt="Sagar Transformation" loading="lazy"><div class="t-overlay"><span>Sagar</span></div></div>
-                <div class="t-card" data-testid="t-sayali"><img src="images/transformations/Sayali.jpg" alt="Sayali Transformation" loading="lazy"><div class="t-overlay"><span>Sayali</span></div></div>
-                <div class="t-card" data-testid="t-sristi"><img src="images/transformations/Sristi.jpg" alt="Sristi Transformation" loading="lazy"><div class="t-overlay"><span>Sristi</span></div></div>
-                <div class="t-card" data-testid="t-rekha"><img src="images/transformations/Rekha.jpg" alt="Rekha Transformation" loading="lazy"><div class="t-overlay"><span>Rekha</span></div></div>
-                <div class="t-card" data-testid="t-ashutosh"><img src="images/transformations/Ashutosh.jpg" alt="Ashutosh Transformation" loading="lazy"><div class="t-overlay"><span>Ashutosh</span></div></div>
-                <div class="t-card" data-testid="t-sumeet"><img src="images/transformations/Sumeet.jpg" alt="Sumeet Transformation" loading="lazy"><div class="t-overlay"><span>Sumeet</span></div></div>
-                <div class="t-card" data-testid="t-rohan"><img src="images/transformations/Rohan raut.jpg" alt="Rohan Transformation" loading="lazy"><div class="t-overlay"><span>Rohan</span></div></div>
+            <div class="transform-grid" id="transformGrid" data-testid="transformation-grid">
+                <div class="t-card" data-testid="t-aditya" data-lb-img="images/transformations/Aditya.jpg" data-lb-name="Aditya"><img src="images/transformations/Aditya.jpg" alt="Aditya Transformation" loading="lazy"><div class="t-overlay"><span>Aditya</span></div></div>
+                <div class="t-card" data-testid="t-ajay" data-lb-img="images/transformations/Ajay.jpg" data-lb-name="Ajay"><img src="images/transformations/Ajay.jpg" alt="Ajay Transformation" loading="lazy"><div class="t-overlay"><span>Ajay</span></div></div>
+                <div class="t-card" data-testid="t-amrita" data-lb-img="images/transformations/Amrita.jpg" data-lb-name="Amrita"><img src="images/transformations/Amrita.jpg" alt="Amrita Transformation" loading="lazy"><div class="t-overlay"><span>Amrita</span></div></div>
+                <div class="t-card" data-testid="t-aniket" data-lb-img="images/transformations/Aniket.jpg" data-lb-name="Aniket"><img src="images/transformations/Aniket.jpg" alt="Aniket Transformation" loading="lazy"><div class="t-overlay"><span>Aniket</span></div></div>
+                <div class="t-card" data-testid="t-ketan" data-lb-img="images/transformations/Ketan.jpg" data-lb-name="Ketan"><img src="images/transformations/Ketan.jpg" alt="Ketan Transformation" loading="lazy"><div class="t-overlay"><span>Ketan</span></div></div>
+                <div class="t-card" data-testid="t-omkar" data-lb-img="images/transformations/Omkar.jpg" data-lb-name="Omkar"><img src="images/transformations/Omkar.jpg" alt="Omkar Transformation" loading="lazy"><div class="t-overlay"><span>Omkar</span></div></div>
+                <div class="t-card" data-testid="t-sagar" data-lb-img="images/transformations/Sagar.jpg" data-lb-name="Sagar"><img src="images/transformations/Sagar.jpg" alt="Sagar Transformation" loading="lazy"><div class="t-overlay"><span>Sagar</span></div></div>
+                <div class="t-card" data-testid="t-sayali" data-lb-img="images/transformations/Sayali.jpg" data-lb-name="Sayali"><img src="images/transformations/Sayali.jpg" alt="Sayali Transformation" loading="lazy"><div class="t-overlay"><span>Sayali</span></div></div>
+                <div class="t-card" data-testid="t-sristi" data-lb-img="images/transformations/Sristi.jpg" data-lb-name="Sristi"><img src="images/transformations/Sristi.jpg" alt="Sristi Transformation" loading="lazy"><div class="t-overlay"><span>Sristi</span></div></div>
+                <div class="t-card" data-testid="t-rekha" data-lb-img="images/transformations/Rekha.jpg" data-lb-name="Rekha"><img src="images/transformations/Rekha.jpg" alt="Rekha Transformation" loading="lazy"><div class="t-overlay"><span>Rekha</span></div></div>
+                <div class="t-card" data-testid="t-ashutosh" data-lb-img="images/transformations/Ashutosh.jpg" data-lb-name="Ashutosh"><img src="images/transformations/Ashutosh.jpg" alt="Ashutosh Transformation" loading="lazy"><div class="t-overlay"><span>Ashutosh</span></div></div>
+                <div class="t-card" data-testid="t-sumeet" data-lb-img="images/transformations/Sumeet.jpg" data-lb-name="Sumeet"><img src="images/transformations/Sumeet.jpg" alt="Sumeet Transformation" loading="lazy"><div class="t-overlay"><span>Sumeet</span></div></div>
+                <div class="t-card" data-testid="t-rohan" data-lb-img="images/transformations/Rohan raut.jpg" data-lb-name="Rohan"><img src="images/transformations/Rohan raut.jpg" alt="Rohan Transformation" loading="lazy"><div class="t-overlay"><span>Rohan</span></div></div>
             </div>
         </div>
     </div>
@@ -234,9 +234,15 @@
                 </div>
                 <div class="press-row" data-testid="press-row">
                     <span class="press-label">As seen in</span>
-                    <a href="https://hindustanbytes.com/ayush-thakur-new-indias-fitness-coach-and-a-former-international-martial-artist" target="_blank" rel="noopener" class="press-pill" data-testid="press-hindustan">Hindustan Bytes</a>
-                    <a href="https://www.thedailybeat.in/ayush-thakur-new-indias-fitness-coach-and-a-former-international-martial-artist" target="_blank" rel="noopener" class="press-pill" data-testid="press-dailybeat">The Daily Beat</a>
-                    <a href="https://share.google/L3KtV7UgBuUgI7GjG" target="_blank" rel="noopener" class="press-pill" data-testid="press-inc91">INC91</a>
+                    <a href="https://hindustanbytes.com/ayush-thakur-new-indias-fitness-coach-and-a-former-international-martial-artist" target="_blank" rel="noopener" class="press-logo-link" data-testid="press-hindustan">
+                        <img src="images/Hindustan Bytes.png" alt="Hindustan Bytes" class="press-logo-img">
+                    </a>
+                    <a href="https://www.inc91.com/ayush-thakur-is-the-fitness-instructor-for-new-india-and-a-former-international-martial-artist" target="_blank" rel="noopener" class="press-logo-link" data-testid="press-inc91">
+                        <img src="images/INC91.png" alt="INC91" class="press-logo-img">
+                    </a>
+                    <a href="https://www.entrepreneurhunt.com/ayush-thakur-new-indias-fitness-coach-and-a-former-international-martial-artist" target="_blank" rel="noopener" class="press-logo-link" data-testid="press-entrepreneurhunt">
+                        <img src="images/Entrepreneur Hunt.png" alt="Entrepreneur Hunt" class="press-logo-img">
+                    </a>
                 </div>
             </div>
         </div>
@@ -310,6 +316,37 @@
                     <li><i class="fas fa-check-circle"></i> Long-term Habit Building</li>
                 </ul>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== MEDIA COVERAGE SECTION ========== -->
+<section class="section bg-light" id="media-coverage" data-testid="media-coverage-section">
+    <div class="container">
+        <div class="section-label">Media Coverage</div>
+        <h2 class="section-h2">As Featured In <span class="text-blue">Leading Publications</span></h2>
+        <p class="section-sub">Ayush Thakur's transformative coaching methods have been recognised and featured by top media outlets across India.</p>
+        <div class="articles-grid" data-testid="articles-grid">
+            <a href="https://hindustanbytes.com/ayush-thakur-new-indias-fitness-coach-and-a-former-international-martial-artist" target="_blank" rel="noopener" class="article-card" data-testid="article-hindustan">
+                <div class="article-img-wrap">
+                    <img src="images/Hindustan Bytes.jpeg" alt="Hindustan Bytes Article - Ayush Thakur" loading="lazy">
+                    <div class="article-overlay"><i class="fas fa-external-link-alt"></i> Read Article</div>
+                </div>
+                <div class="article-info">
+                    <img src="images/Hindustan Bytes.png" alt="Hindustan Bytes" class="article-pub-logo">
+                    <p class="article-title">New India's Fitness Coach & Former International Martial Artist</p>
+                </div>
+            </a>
+            <a href="https://www.inc91.com/ayush-thakur-is-the-fitness-instructor-for-new-india-and-a-former-international-martial-artist" target="_blank" rel="noopener" class="article-card" data-testid="article-inc91">
+                <div class="article-img-wrap">
+                    <img src="images/INC91.jpeg" alt="INC91 Article - Ayush Thakur" loading="lazy">
+                    <div class="article-overlay"><i class="fas fa-external-link-alt"></i> Read Article</div>
+                </div>
+                <div class="article-info">
+                    <img src="images/INC91.png" alt="INC91" class="article-pub-logo">
+                    <p class="article-title">The Fitness Instructor for New India & Former International Martial Artist</p>
+                </div>
+            </a>
         </div>
     </div>
 </section>
@@ -511,6 +548,15 @@
     <div class="sp-body">
         <div class="sp-text" id="spText">Priya from Mumbai just booked</div>
         <div class="sp-meta"><span class="sp-dot"></span><span class="sp-time">Just now</span></div>
+    </div>
+</div>
+
+<!-- ========== IMAGE LIGHTBOX ========== -->
+<div class="lightbox-overlay" id="lightboxOverlay" data-testid="lightbox-overlay">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close"><i class="fas fa-times"></i></button>
+    <div class="lightbox-content">
+        <img src="" alt="" id="lightboxImg" class="lightbox-img">
+        <p class="lightbox-caption" id="lightboxCaption"></p>
     </div>
 </div>
 

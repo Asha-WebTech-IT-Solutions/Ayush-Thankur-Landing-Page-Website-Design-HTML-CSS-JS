@@ -68,7 +68,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         if (target) {
             e.preventDefault();
             const navH = navbar ? navbar.offsetHeight : 72;
-            const top = target.getBoundingClientRect().top + window.scrollY - navH - 12;
+            // Extra offset on mobile to account for sticky bars
+            const extra = (href === '#leadForm' && window.innerWidth < 1024) ? 20 : 12;
+            const top = target.getBoundingClientRect().top + window.scrollY - navH - extra;
             window.scrollTo({ top, behavior: 'smooth' });
         }
     });
@@ -476,6 +478,9 @@ document.querySelectorAll('.btn-primary').forEach(btn => {
 
     let idx = 0;
     function showNext() {
+        // Don't show popup when user is on the booking form
+        if (popup.getAttribute('data-form-visible') === 'true') return;
+
         const entry = entries[idx % entries.length];
         idx++;
         const initial = entry.name.charAt(0).toUpperCase();
@@ -521,4 +526,86 @@ document.querySelectorAll('.btn-primary').forEach(btn => {
     window.addEventListener('scroll', updateStickyVisibility, { passive: true });
     window.addEventListener('resize', updateStickyVisibility);
     updateStickyVisibility();
+})();
+
+// ---------- HIDE SOCIAL PROOF POPUP WHEN ON FORM SECTION ----------
+(function initPopupFormHide() {
+    const bookFormSection = document.getElementById('book-form');
+    if (!bookFormSection) return;
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const popup = document.getElementById('spNotification');
+            if (!popup) return;
+            if (entry.isIntersecting) {
+                // Form section visible — hide popup and prevent showing
+                popup.classList.remove('show');
+                setTimeout(() => { popup.style.display = 'none'; }, 400);
+                popup.setAttribute('data-form-visible', 'true');
+            } else {
+                popup.removeAttribute('data-form-visible');
+            }
+        });
+    }, { threshold: 0.1 });
+    observer.observe(bookFormSection);
+})();
+
+// ---------- DRAG-TO-SCROLL FOR TRANSFORMATION GRID ----------
+(function initDragScroll() {
+    const grid = document.getElementById('transformGrid');
+    if (!grid) return;
+    let isDown = false, startX, scrollLeft;
+    grid.addEventListener('mousedown', (e) => {
+        isDown = true;
+        grid.classList.add('dragging');
+        startX = e.pageX - grid.offsetLeft;
+        scrollLeft = grid.scrollLeft;
+    });
+    grid.addEventListener('mouseleave', () => { isDown = false; grid.classList.remove('dragging'); });
+    grid.addEventListener('mouseup', () => { isDown = false; grid.classList.remove('dragging'); });
+    grid.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - grid.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        grid.scrollLeft = scrollLeft - walk;
+    });
+})();
+
+// ---------- TRANSFORMATION PHOTO LIGHTBOX ----------
+(function initLightbox() {
+    const overlay = document.getElementById('lightboxOverlay');
+    const img     = document.getElementById('lightboxImg');
+    const caption = document.getElementById('lightboxCaption');
+    const closeBtn= document.getElementById('lightboxClose');
+    if (!overlay) return;
+
+    // Open on t-card click — but only if not dragging
+    let dragDistance = 0;
+    const grid = document.getElementById('transformGrid');
+    if (grid) {
+        grid.addEventListener('mousedown', (e) => { dragDistance = 0; });
+        grid.addEventListener('mousemove', (e) => { dragDistance++; });
+    }
+
+    document.querySelectorAll('.t-card[data-lb-img]').forEach(card => {
+        card.addEventListener('click', () => {
+            if (dragDistance > 5) return; // was a drag, not a click
+            const src  = card.getAttribute('data-lb-img');
+            const name = card.getAttribute('data-lb-name') || '';
+            img.src = src;
+            img.alt = name + ' Transformation';
+            caption.textContent = name + ' — Transformation Result';
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    function closeLightbox() {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+        setTimeout(() => { img.src = ''; }, 300);
+    }
+    closeBtn.addEventListener('click', closeLightbox);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeLightbox(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
 })();

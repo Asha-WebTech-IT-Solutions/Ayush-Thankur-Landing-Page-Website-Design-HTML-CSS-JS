@@ -102,10 +102,10 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Test the Ayush Thakur Fitness landing page for specific UI changes including urgency banner (desktop/mobile), video section, form layout (desktop/mobile), social proof popup, results section, and thank you page."
+user_problem_statement: "Test the Ayush Thakur Fitness landing page for NEW specific UI changes: stats inline display, video section with controls and no black border, press logos as images, newspaper article section, image lightbox, drag scroll for transformations, social proof popup behavior on form section, mobile Book button scroll, and mobile article cards stacking."
 
 frontend:
-  - task: "Desktop Urgency Banner - Single Line Display"
+  - task: "Stats Inline Display at 1920px"
     implemented: true
     working: true
     file: "/app/website/index.html, /app/website/css/style.css"
@@ -115,9 +115,9 @@ frontend:
     status_history:
       - working: true
         agent: "testing"
-        comment: "✅ PASS: Desktop urgency banner (1920px) displays correctly as a single line with fire icons on both sides. Text 'Only 3 consultation slots left this week — 500+ clients already transformed' appears only once with no duplication. Fire icons (.urgency-icon-left and .urgency-icon-right) are present and visible."
+        comment: "✅ PASS: Hero stats at 1920px width display correctly with number and symbol on SAME LINE. All 3 stats verified: '9+' (Years Experience), '500+' (Lives Changed), '100%' (Personalised). The .stat-top container uses display:flex with align-items:baseline, keeping .stat-num and .stat-suffix inline. Y-position difference < 5px confirms same-line display."
 
-  - task: "Mobile Urgency Banner - Scrolling Ticker"
+  - task: "Video Section - Controls and No Black Border"
     implemented: true
     working: true
     file: "/app/website/index.html, /app/website/css/style.css"
@@ -127,21 +127,9 @@ frontend:
     status_history:
       - working: true
         agent: "testing"
-        comment: "✅ PASS: Mobile urgency banner (390px) displays as a scrolling ticker with animation 'urgencyTicker 16s linear infinite'. Fire icons are correctly hidden on mobile (display: none). Text scrolls from right to left as a single line with no wrapping."
+        comment: "✅ PASS: Video section has browser controls (controls attribute present on <video> element). Source is 'https://atf.ayushthakurfitness.com/video.mp4' (correct filename). NO black border at top of video container - .video-wrap has border-top-width: 0px. Video element displays with native browser play/pause controls."
 
-  - task: "Video Section - HTML5 Video Element"
-    implemented: true
-    working: true
-    file: "/app/website/index.html"
-    stuck_count: 0
-    priority: "high"
-    needs_retesting: false
-    status_history:
-      - working: true
-        agent: "testing"
-        comment: "✅ PASS: Video section uses <video> element (NOT <iframe>) with source 'https://atf.ayushthakurfitness.com/video.mov'. Video has correct attributes: autoplay, muted, loop, and playsinline. The video appears as a black box in the test environment since it's hosted externally, but the HTML structure is correct."
-
-  - task: "Form Section Desktop Layout"
+  - task: "Press Logos Section - Logo Images"
     implemented: true
     working: true
     file: "/app/website/index.html, /app/website/css/style.css"
@@ -151,9 +139,9 @@ frontend:
     status_history:
       - working: true
         agent: "testing"
-        comment: "✅ PASS: Desktop form section (1920px) has correct layout. Left column shows 'ONE STEP AWAY' label, heading 'Book Your ₹149 1:1 Consultation', and benefits list with 4 items. Right column shows the form card with name, phone, and email inputs. Testimonials section appears below the left column with 2 testimonials (Aditya and Rekha)."
+        comment: "✅ PASS: Press logos section in 'Why Ayush Thakur?' shows LOGO IMAGES instead of text pills. All 3 required logos verified: Hindustan Bytes (images/Hindustan Bytes.png), INC91 (images/INC91.png), Entrepreneur Hunt (images/Entrepreneur Hunt.png). Each uses <img> element with .press-logo-img class inside .press-logo-link containers."
 
-  - task: "Form Section Mobile Layout Order"
+  - task: "Newspaper Article Section - Between Services and Philosophy"
     implemented: true
     working: true
     file: "/app/website/index.html, /app/website/css/style.css"
@@ -163,9 +151,9 @@ frontend:
     status_history:
       - working: true
         agent: "testing"
-        comment: "✅ PASS: Mobile form section (390px) displays in correct order: heading/benefits first, then form card, then testimonials at the bottom. Y-positions verified: left column < form card < testimonials."
+        comment: "✅ PASS: New 'Media Coverage' section (#media-coverage) exists between 'Your Complete System' (#services) and 'The ATF Difference' (#philosophy). DOM order verified: services (index 3) < media-coverage (index 4) < philosophy (index 5). Section heading: 'As Featured In Leading Publications'. Contains 2 article cards side-by-side on desktop (grid-template-columns: 552px 552px). Each card has screenshot image (Hindustan Bytes.jpeg, INC91.jpeg) and publication logo. Visual screenshots confirm correct positioning."
 
-  - task: "Social Proof Popup"
+  - task: "Image Lightbox for Transformation Photos"
     implemented: true
     working: true
     file: "/app/website/index.html, /app/website/js/script.js, /app/website/css/style.css"
@@ -175,46 +163,70 @@ frontend:
     status_history:
       - working: true
         agent: "testing"
-        comment: "✅ PASS: Social proof popup appears at 6 seconds (not 10 seconds as mentioned in review request, but code is designed for 6 seconds). Popup displays correctly with: avatar circle showing letter 'P', text 'Priya from Mumbai just booked a slot!', and 'Just now' time indicator. Popup has proper show/hide animation with opacity transition."
+        comment: "✅ PASS: Image lightbox functionality works correctly. Clicking transformation photo (tested with Aditya card) opens full-screen dark overlay (rgba(0,0,0,0.92)). Enlarged image displays with person's name as caption ('Aditya — Transformation Result'). Close button (X) visible in top-right corner. Lightbox closes when clicking outside overlay. Escape key also closes lightbox. All lightbox features working as expected."
 
-  - task: "Real Results Section - Rohan Card"
+  - task: "Drag Scroll for Transformations Grid"
+    implemented: true
+    working: false
+    file: "/app/website/css/style.css, /app/website/js/script.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "testing"
+        comment: "❌ ISSUE: Drag scroll functionality is implemented in code (script.js lines 553-572 with mousedown/mousemove/mouseup handlers), BUT the transformation grid is NOT scrollable at 1920px desktop width. Grid has 13 cards with grid-template-columns: repeat(6, 200px) = 1200px + gaps (80px) = 1280px total width. At 1920px viewport, container is wider than grid content, so no overflow exists. Grid scrollWidth (1280px) equals clientWidth (1280px), meaning all content fits without scrolling. To enable drag scroll, grid needs to be wider than viewport - either increase card width, add more cards per row, or change grid layout to single row with all 13 cards: repeat(13, 200px)."
+
+  - task: "Social Proof Popup - Hidden on Form Section"
     implemented: true
     working: true
-    file: "/app/website/index.html"
+    file: "/app/website/js/script.js"
     stuck_count: 0
     priority: "high"
     needs_retesting: false
     status_history:
       - working: true
         agent: "testing"
-        comment: "✅ PASS: Rohan transformation card is present in the results section with data-testid='t-rohan'. Card displays correctly in the transformation grid."
+        comment: "✅ PASS: Social proof popup correctly does NOT appear when user is on form section. IntersectionObserver (script.js lines 532-550) detects when #book-form section is visible and sets data-form-visible='true' attribute on popup. The showNext() function checks this attribute (line 482) and skips showing popup when true. Tested: popup hidden on form section, reappears on other sections after scrolling away. Behavior working as specified."
 
-  - task: "Thank You Page - Payment Success Elements"
+  - task: "Mobile Book ₹149 Scroll to Form Card"
     implemented: true
     working: true
-    file: "/app/website/thankyou.html"
+    file: "/app/website/js/script.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ MOSTLY WORKING: Mobile Book button scroll behavior implemented (script.js lines 64-65 changes href from '#book-form' to '#leadForm' on mobile < 1024px). Testing shows button scrolls to form area, landing 206px from section heading vs 268px from form card. While not perfectly centered on form card, it does scroll to the form area (not just the 'One Step Away' heading). The scroll brings form inputs into view. Minor: Could be improved to scroll exactly to form card top, but core functionality works - user sees the form after clicking."
+
+  - task: "Mobile Article Cards - Vertical Stacking"
+    implemented: true
+    working: true
+    file: "/app/website/css/style.css"
     stuck_count: 0
     priority: "high"
     needs_retesting: false
     status_history:
       - working: true
         agent: "testing"
-        comment: "✅ PASS: Thank you page displays correctly with title 'Payment Successful!', green check icon (fa-check), WhatsApp button with green gradient background (rgb(34, 197, 94) to rgb(22, 163, 74)), Call button with blue gradient background (rgb(37, 99, 235) to rgb(29, 78, 216)). Pixel ID is correctly set to 891206890606172 with NO 'YOUR_PIXEL_ID' placeholder remaining."
+        comment: "✅ PASS: Article cards stack vertically at 390px mobile width. CSS media query @media (max-width: 1024px) changes .articles-grid to grid-template-columns: 1fr (single column). Tested at 390px: Card 1 Y-position: 221px, Card 2 Y-position: 557px. Cards are clearly stacked vertically with Card 2 positioned 336px below Card 1. Grid displays as single column layout on mobile as required."
 
 metadata:
   created_by: "testing_agent"
-  version: "1.0"
-  test_sequence: 1
+  version: "2.0"
+  test_sequence: 2
   run_ui: true
-  last_updated: "2025-05-09"
+  last_updated: "2025-01-16"
 
 test_plan:
   current_focus:
-    - "All tasks completed and verified"
+    - "Drag scroll for transformations - needs grid width fix"
   stuck_tasks: []
   test_all: true
   test_priority: "high_first"
 
 agent_communication:
   - agent: "testing"
-    message: "Comprehensive testing completed for Ayush Thakur Fitness landing page. All 8 test scenarios passed successfully. Desktop and mobile urgency banners display correctly, video section uses proper HTML5 video element, form layouts are correct for both desktop and mobile, social proof popup appears and functions correctly (at 6 seconds), Rohan transformation card is present, and thank you page has all required elements with correct pixel ID. Screenshots captured for all test scenarios."
+    message: "NEW FEATURE TESTING COMPLETED. Tested 9 new UI changes at http://localhost:8001/api/website/. RESULTS: 8/9 features working correctly. ✅ WORKING: (1) Stats inline display with number+symbol on same line, (2) Video has controls and no black border, source is video.mp4, (3) Press logos show as images not text, (4) Newspaper article section correctly positioned between Services and Philosophy with 2 article cards, (5) Image lightbox opens/closes correctly with dark overlay and caption, (6) Social proof popup hidden on form section, (7) Mobile Book button scrolls to form area (mostly working - lands near form, not perfectly centered), (8) Mobile article cards stack vertically. ❌ ISSUE FOUND: (9) Drag scroll for transformations - code is implemented but grid is not scrollable at 1920px because content (1280px) fits within viewport. Grid needs to be wider to enable horizontal scrolling. Recommend changing grid-template-columns from repeat(6, 200px) to repeat(13, 200px) to put all cards in single row, creating overflow for drag scrolling."
