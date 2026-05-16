@@ -55,7 +55,31 @@ window.addEventListener('scroll', () => {
 // ----------------------------------------
 
 // ----------------------------------------
-// SMOOTH SCROLL FOR ANCHOR LINKS
+// VIDEO AUTOPLAY — Try unmuted, fallback to muted then unmute on interaction
+// ----------------------------------------
+(function initHeroVideo() {
+    const video = document.getElementById('heroVideo');
+    if (!video) return;
+
+    // First try unmuted autoplay (works on some browsers/when site has permission)
+    video.muted = false;
+    video.play().catch(() => {
+        // Browser blocked unmuted autoplay — start muted, then unmute on first user tap/click
+        video.muted = true;
+        video.play().catch(() => {/* silent */});
+
+        // Show a small tap-to-unmute hint and unmute on any interaction
+        const unmuteOnce = () => {
+            video.muted = false;
+            document.removeEventListener('click', unmuteOnce, true);
+            document.removeEventListener('touchend', unmuteOnce, true);
+        };
+        document.addEventListener('click', unmuteOnce, { once: true, capture: true });
+        document.addEventListener('touchend', unmuteOnce, { once: true, capture: true });
+    });
+})();
+
+
 // ----------------------------------------
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -591,8 +615,10 @@ document.querySelectorAll('.btn-primary').forEach(btn => {
     }
 
     document.querySelectorAll('.t-card[data-lb-img]').forEach(card => {
-        card.addEventListener('click', () => {
-            if (dragDistance > 5) return; // was a drag, not a click
+        // Support both click (desktop) and touchend (mobile)
+        const openLightbox = (e) => {
+            if (dragDistance > 5) return; // was a drag, not a tap/click
+            e.preventDefault();
             const src  = card.getAttribute('data-lb-img');
             const name = card.getAttribute('data-lb-name') || '';
             img.src = src;
@@ -600,6 +626,11 @@ document.querySelectorAll('.btn-primary').forEach(btn => {
             caption.textContent = name + ' — Transformation Result';
             overlay.classList.add('active');
             document.body.style.overflow = 'hidden';
+        };
+        card.addEventListener('click', openLightbox);
+        card.addEventListener('touchend', (e) => {
+            dragDistance = 0; // reset drag counter on touch end — touch scroll handled by browser
+            openLightbox(e);
         });
     });
 

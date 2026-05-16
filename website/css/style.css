@@ -816,8 +816,8 @@ a.press-pill:hover { text-decoration: underline; }
 }
 .article-img-wrap img {
     width: 100%;
-    height: 240px;
-    object-fit: cover;
+    height: auto;
+    object-fit: unset;
     display: block;
     transition: transform 0.3s ease;
 }
@@ -860,13 +860,13 @@ a.press-pill:hover { text-decoration: underline; }
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.92);
-    z-index: 9999;
+    z-index: 100000;
     align-items: center;
     justify-content: center;
     padding: 1rem;
     cursor: zoom-out;
 }
-.lightbox-overlay.active { display: flex; }
+.lightbox-overlay.active { display: flex !important; }
 .lightbox-close {
     position: absolute;
     top: 1rem;
@@ -883,7 +883,7 @@ a.press-pill:hover { text-decoration: underline; }
     align-items: center;
     justify-content: center;
     transition: background 0.2s;
-    z-index: 10000;
+    z-index: 100001;
 }
 .lightbox-close:hover { background: rgba(255,255,255,0.3); }
 .lightbox-content { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; max-height: 90vh; }
@@ -896,9 +896,9 @@ a.press-pill:hover { text-decoration: underline; }
     box-shadow: 0 25px 60px rgba(0,0,0,0.5);
 }
 .lightbox-caption { color: rgba(255,255,255,0.8); font-size: 0.88rem; font-family: 'Poppins', sans-serif; font-weight: 600; }
-.t-card { cursor: zoom-in; }
+.t-card { cursor: zoom-in; touch-action: manipulation; }
 #transformGrid.dragging { cursor: grabbing; user-select: none; }
-#transformGrid.dragging .t-card { cursor: grabbing; }
+#transformGrid.dragging .t-card { cursor: grabbing; pointer-events: none; }
 
 /* ============================================
    TRANSFORMATIONS
@@ -1531,7 +1531,6 @@ a.press-pill:hover { text-decoration: underline; }
     .philo-vs { display: none; }
     .offer-grid { grid-template-columns: 1fr; }
     .articles-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-    .article-img-wrap img { height: 200px; }
     .form-grid {
         grid-template-columns: 1fr;
         grid-template-rows: auto auto auto;
@@ -1719,7 +1718,7 @@ a.press-pill:hover { text-decoration: underline; }
     width: 100%;
     border-radius: var(--radius-md);
     overflow: hidden;
-    background: #000;
+    background: transparent;
 }
 .video-wrap iframe,
 .video-wrap video {
