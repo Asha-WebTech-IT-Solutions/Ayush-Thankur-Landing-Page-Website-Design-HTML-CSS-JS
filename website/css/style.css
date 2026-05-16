@@ -917,7 +917,7 @@ a.press-pill:hover { text-decoration: underline; }
 
 .transform-grid {
     display: grid;
-    grid-template-columns: repeat(6, 200px);
+    grid-template-columns: repeat(13, 200px);
     gap: 1rem;
     min-width: max-content;
 }

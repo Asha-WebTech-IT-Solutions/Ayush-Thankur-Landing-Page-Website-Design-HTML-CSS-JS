@@ -553,21 +553,23 @@ document.querySelectorAll('.btn-primary').forEach(btn => {
 (function initDragScroll() {
     const grid = document.getElementById('transformGrid');
     if (!grid) return;
+    const wrapper = grid.parentElement; // .transform-scroll-wrapper has overflow-x: auto
+    if (!wrapper) return;
     let isDown = false, startX, scrollLeft;
-    grid.addEventListener('mousedown', (e) => {
+    wrapper.addEventListener('mousedown', (e) => {
         isDown = true;
         grid.classList.add('dragging');
-        startX = e.pageX - grid.offsetLeft;
-        scrollLeft = grid.scrollLeft;
+        startX = e.pageX - wrapper.offsetLeft;
+        scrollLeft = wrapper.scrollLeft;
     });
-    grid.addEventListener('mouseleave', () => { isDown = false; grid.classList.remove('dragging'); });
-    grid.addEventListener('mouseup', () => { isDown = false; grid.classList.remove('dragging'); });
-    grid.addEventListener('mousemove', (e) => {
+    wrapper.addEventListener('mouseleave', () => { isDown = false; grid.classList.remove('dragging'); });
+    wrapper.addEventListener('mouseup', () => { isDown = false; grid.classList.remove('dragging'); });
+    wrapper.addEventListener('mousemove', (e) => {
         if (!isDown) return;
         e.preventDefault();
-        const x = e.pageX - grid.offsetLeft;
+        const x = e.pageX - wrapper.offsetLeft;
         const walk = (x - startX) * 1.5;
-        grid.scrollLeft = scrollLeft - walk;
+        wrapper.scrollLeft = scrollLeft - walk;
     });
 })();
 
@@ -582,9 +584,10 @@ document.querySelectorAll('.btn-primary').forEach(btn => {
     // Open on t-card click — but only if not dragging
     let dragDistance = 0;
     const grid = document.getElementById('transformGrid');
-    if (grid) {
-        grid.addEventListener('mousedown', (e) => { dragDistance = 0; });
-        grid.addEventListener('mousemove', (e) => { dragDistance++; });
+    const wrapper = grid ? grid.parentElement : null;
+    if (wrapper) {
+        wrapper.addEventListener('mousedown', () => { dragDistance = 0; });
+        wrapper.addEventListener('mousemove', () => { dragDistance++; });
     }
 
     document.querySelectorAll('.t-card[data-lb-img]').forEach(card => {

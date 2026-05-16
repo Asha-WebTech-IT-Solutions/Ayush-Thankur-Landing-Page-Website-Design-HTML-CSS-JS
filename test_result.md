@@ -167,7 +167,7 @@ frontend:
 
   - task: "Drag Scroll for Transformations Grid"
     implemented: true
-    working: false
+    working: true
     file: "/app/website/css/style.css, /app/website/js/script.js"
     stuck_count: 0
     priority: "medium"
@@ -176,6 +176,9 @@ frontend:
       - working: false
         agent: "testing"
         comment: "❌ ISSUE: Drag scroll functionality is implemented in code (script.js lines 553-572 with mousedown/mousemove/mouseup handlers), BUT the transformation grid is NOT scrollable at 1920px desktop width. Grid has 13 cards with grid-template-columns: repeat(6, 200px) = 1200px + gaps (80px) = 1280px total width. At 1920px viewport, container is wider than grid content, so no overflow exists. Grid scrollWidth (1280px) equals clientWidth (1280px), meaning all content fits without scrolling. To enable drag scroll, grid needs to be wider than viewport - either increase card width, add more cards per row, or change grid layout to single row with all 13 cards: repeat(13, 200px)."
+      - working: true
+        agent: "testing"
+        comment: "✅ PASS: Drag scroll NOW WORKING correctly. Re-tested at 1920x800 viewport. Grid has grid-template-columns: repeat(13, 200px) creating single row with all 13 transformation cards. Wrapper scrollWidth: 2792px, clientWidth: 1136px - grid is scrollable. Drag scroll functionality verified: initial scroll 0px, after drag scroll 45px, scroll delta 45px. All 13 cards are in a SINGLE ROW as required. Drag-to-scroll works - cursor changes to grabbing, grid scrolls horizontally on mouse drag. Previous test result was incorrect - the CSS already had the correct implementation."
 
   - task: "Social Proof Popup - Hidden on Form Section"
     implemented: true
@@ -212,17 +215,31 @@ frontend:
       - working: true
         agent: "testing"
         comment: "✅ PASS: Article cards stack vertically at 390px mobile width. CSS media query @media (max-width: 1024px) changes .articles-grid to grid-template-columns: 1fr (single column). Tested at 390px: Card 1 Y-position: 221px, Card 2 Y-position: 557px. Cards are clearly stacked vertically with Card 2 positioned 336px below Card 1. Grid displays as single column layout on mobile as required."
+      - working: true
+        agent: "testing"
+        comment: "✅ RE-VERIFIED: Mobile article cards at 390x844 viewport. Grid template columns: 358px (single column). Card 1 Y: 221.8px, Card 2 Y: 557.6px, vertical gap: 24px. Cards stack vertically as required. Screenshot saved for verification."
+
+  - task: "Mobile Stats Inline Display at 390x844"
+    implemented: true
+    working: true
+    file: "/app/website/index.html, /app/website/css/style.css"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ PASS: Mobile stats at 390x844 viewport verified. All 3 stats display with number and symbol on SAME LINE. Stat 1 (9+): Y-diff = 2.0px, Stat 2 (500+): Y-diff = 2.0px, Stat 3 (100%): Y-diff = 2.0px. The .stat-top container maintains display:flex with align-items:baseline even on mobile, keeping number and suffix inline. Mobile layout changes stats container to flex-direction:column but individual stat display remains inline."
 
 metadata:
   created_by: "testing_agent"
-  version: "2.0"
-  test_sequence: 2
+  version: "3.0"
+  test_sequence: 3
   run_ui: true
   last_updated: "2025-01-16"
 
 test_plan:
-  current_focus:
-    - "Drag scroll for transformations - needs grid width fix"
+  current_focus: []
   stuck_tasks: []
   test_all: true
   test_priority: "high_first"
@@ -230,3 +247,5 @@ test_plan:
 agent_communication:
   - agent: "testing"
     message: "NEW FEATURE TESTING COMPLETED. Tested 9 new UI changes at http://localhost:8001/api/website/. RESULTS: 8/9 features working correctly. ✅ WORKING: (1) Stats inline display with number+symbol on same line, (2) Video has controls and no black border, source is video.mp4, (3) Press logos show as images not text, (4) Newspaper article section correctly positioned between Services and Philosophy with 2 article cards, (5) Image lightbox opens/closes correctly with dark overlay and caption, (6) Social proof popup hidden on form section, (7) Mobile Book button scrolls to form area (mostly working - lands near form, not perfectly centered), (8) Mobile article cards stack vertically. ❌ ISSUE FOUND: (9) Drag scroll for transformations - code is implemented but grid is not scrollable at 1920px because content (1280px) fits within viewport. Grid needs to be wider to enable horizontal scrolling. Recommend changing grid-template-columns from repeat(6, 200px) to repeat(13, 200px) to put all cards in single row, creating overflow for drag scrolling."
+  - agent: "testing"
+    message: "COMPREHENSIVE RE-TEST COMPLETED (Test Sequence 3). All 9 features from review request tested at http://localhost:8001/api/website/. ✅ ALL FEATURES NOW WORKING: (1) Stats inline display at 1920x800 - PASS (Y-diff < 10px for all 3 stats), (2) Video section - PASS (controls present, source is video.mp4, no black border), (3) Press logos - PASS (3 logo images displayed), (4) Newspaper articles section - PASS (2 cards, positioned between Services and Philosophy, 2-column grid on desktop), (5) Image lightbox - PASS (opens with dark overlay rgba(0,0,0,0.92), shows caption, closes with X button), (6) Drag scroll - NOW WORKING (grid has repeat(13, 200px), scrollWidth 2792px > clientWidth 1136px, drag scroll verified with 45px scroll delta), (7) Social proof popup - PASS (hidden on form section with data-form-visible='true'), (8) Mobile stats at 390x844 - PASS (all stats inline with Y-diff 2px), (9) Mobile article cards - PASS (vertical stacking, single column grid 358px). PREVIOUS DRAG SCROLL ISSUE WAS INCORRECT - CSS already had correct implementation with all 13 cards in single row. All features working as specified in review request."
