@@ -595,9 +595,24 @@ document.querySelectorAll('.btn-primary').forEach(btn => {
         imgEl.src = '';
     }
 
-    // Attach to all cards in both grids
+    // (1) Swipe detection — only open lightbox on a tap, not a swipe
     document.querySelectorAll('.t-card[data-lb-img]').forEach(card => {
+        let touchStartX = 0, touchStartY = 0, wasSwiping = false;
+
+        card.addEventListener('touchstart', function(e) {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            wasSwiping = false;
+        }, { passive: true });
+
+        card.addEventListener('touchend', function(e) {
+            const dx = Math.abs(e.changedTouches[0].clientX - touchStartX);
+            const dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
+            if (dx > 10 || dy > 10) wasSwiping = true;
+        }, { passive: true });
+
         card.addEventListener('click', function() {
+            if (wasSwiping) { wasSwiping = false; return; }
             openLightbox(
                 this.getAttribute('data-lb-img'),
                 this.getAttribute('data-lb-name') || ''
@@ -605,7 +620,22 @@ document.querySelectorAll('.btn-primary').forEach(btn => {
         });
     });
 
+    // Close button
     closeBtn.addEventListener('click', closeLightbox);
-    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeLightbox(); });
+
+    // (2) Close when tapping anywhere outside the lightbox image (not just exact overlay element)
+    overlay.addEventListener('click', function(e) {
+        if (!imgEl.contains(e.target) && e.target !== caption) {
+            closeLightbox();
+        }
+    });
+
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+    // (3) Safety fallback — if overlay is hidden but body scroll is still locked, restore it
+    document.addEventListener('touchend', function() {
+        if (overlay.style.display !== 'flex' && document.body.style.overflow === 'hidden') {
+            document.body.style.overflow = '';
+        }
+    }, { passive: true });
 })();
