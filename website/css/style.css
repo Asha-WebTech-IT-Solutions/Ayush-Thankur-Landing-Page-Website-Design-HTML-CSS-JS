@@ -177,8 +177,12 @@ input, select, textarea { font-family: inherit; }
 .navbar.scrolled { box-shadow: 0 4px 24px rgba(37,99,235,0.10); }
 
 /* scroll-margin-top offsets navbar height for scrollIntoView accuracy */
-#book-form, #leadForm, #hero, #results, #why, #media-coverage, #philosophy, #services, #testimonials, #faq {
+#book-form, #hero, #results, #why, #media-coverage, #philosophy, #services, #testimonials, #faq {
     scroll-margin-top: 76px;
+}
+/* form-right is the direct scroll target on mobile — give it extra clearance */
+#form-right, #leadForm {
+    scroll-margin-top: 90px;
 }
 .nav-inner {
     display: flex;
@@ -1722,24 +1726,24 @@ a.press-pill:hover { text-decoration: underline; }
 .video-wrap {
     position: relative;
     width: 100%;
+    padding-top: 56.25%; /* 16:9 aspect ratio for iframe */
     border-radius: var(--radius-md);
     overflow: hidden;
     background: transparent;
 }
-.video-wrap iframe,
+.video-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
 .video-wrap video {
     display: block;
     width: 100%;
     height: auto;
     border: 0;
     object-fit: unset;
-}
-/* Keep iframe fullscreen inside aspect-ratio container if ever used */
-.video-wrap iframe {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
 }
 .video-cta-below {
     padding: 1rem 0.5rem 0.25rem;

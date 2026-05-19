@@ -63,14 +63,13 @@ window.addEventListener('scroll', () => {
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         let href = this.getAttribute('href');
-        // On mobile, Book Now buttons scroll directly to the form card (not section header)
+        // On mobile (<1024px), skip section header — jump straight to the form card div
         if (href === '#book-form' && window.innerWidth < 1024) {
-            href = '#leadForm';
+            href = '#form-right';
         }
         const target = document.querySelector(href);
         if (target) {
             e.preventDefault();
-            // scrollIntoView is layout-accurate on first click (no getBoundingClientRect race)
             target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     });
