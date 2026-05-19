@@ -55,47 +55,23 @@ window.addEventListener('scroll', () => {
 // ----------------------------------------
 
 // ----------------------------------------
-// VIDEO AUTOPLAY — Try unmuted, fallback to muted then unmute on interaction
+// VIDEO: Let HTML autoplay attributes handle playback (iOS-safe)
+// No JS interference — iOS requires native control handling
 // ----------------------------------------
-(function initHeroVideo() {
-    const video = document.getElementById('heroVideo');
-    if (!video) return;
-
-    // First try unmuted autoplay (works on some browsers/when site has permission)
-    video.muted = false;
-    video.play().catch(() => {
-        // Browser blocked unmuted autoplay — start muted, then unmute on first user tap/click
-        video.muted = true;
-        video.play().catch(() => {/* silent */});
-
-        // Show a small tap-to-unmute hint and unmute on any interaction
-        const unmuteOnce = () => {
-            video.muted = false;
-            document.removeEventListener('click', unmuteOnce, true);
-            document.removeEventListener('touchend', unmuteOnce, true);
-        };
-        document.addEventListener('click', unmuteOnce, { once: true, capture: true });
-        document.addEventListener('touchend', unmuteOnce, { once: true, capture: true });
-    });
-})();
-
 
 // ----------------------------------------
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         let href = this.getAttribute('href');
-        // On mobile, Book Now buttons should scroll to form card directly (not section header)
+        // On mobile, Book Now buttons scroll directly to the form card (not section header)
         if (href === '#book-form' && window.innerWidth < 1024) {
             href = '#leadForm';
         }
         const target = document.querySelector(href);
         if (target) {
             e.preventDefault();
-            const navH = navbar ? navbar.offsetHeight : 72;
-            // Extra offset on mobile to account for sticky bars
-            const extra = (href === '#leadForm' && window.innerWidth < 1024) ? 20 : 12;
-            const top = target.getBoundingClientRect().top + window.scrollY - navH - extra;
-            window.scrollTo({ top, behavior: 'smooth' });
+            // scrollIntoView is layout-accurate on first click (no getBoundingClientRect race)
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     });
 });
