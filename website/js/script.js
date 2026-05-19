@@ -63,8 +63,9 @@ window.addEventListener('scroll', () => {
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         let href = this.getAttribute('href');
-        // On mobile (<1024px), skip section header — jump straight to the form card div
-        if (href === '#book-form' && window.innerWidth < 1024) {
+        // Always scroll directly to the form card on ALL devices
+        // (the #book-form section starts with the countdown timer — skip it)
+        if (href === '#book-form') {
             href = '#form-right';
         }
         const target = document.querySelector(href);
