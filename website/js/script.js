@@ -62,12 +62,26 @@ window.addEventListener('scroll', () => {
 // ----------------------------------------
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        let href = this.getAttribute('href');
-        // Always scroll directly to the form card on ALL devices
-        // (the #book-form section starts with the countdown timer — skip it)
+        const href = this.getAttribute('href');
+
         if (href === '#book-form') {
-            href = '#form-right';
+            // ALWAYS prevent default first — before any element lookup
+            e.preventDefault();
+
+            // Try selectors in order: ID first, then class-based (works even if IDs missing on server)
+            const formTarget =
+                document.getElementById('form-right') ||
+                document.getElementById('leadForm')   ||
+                document.querySelector('#book-form .form-right') ||
+                document.querySelector('#book-form .form-card')  ||
+                document.querySelector('.form-card');
+
+            if (formTarget) {
+                formTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            return;
         }
+
         const target = document.querySelector(href);
         if (target) {
             e.preventDefault();
