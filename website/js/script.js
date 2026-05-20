@@ -65,20 +65,22 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const href = this.getAttribute('href');
 
         if (href === '#book-form') {
-            // ALWAYS prevent default first — before any element lookup
             e.preventDefault();
 
-            // Try selectors in order: ID first, then class-based (works even if IDs missing on server)
-            const formTarget =
-                document.getElementById('form-right') ||
-                document.getElementById('leadForm')   ||
-                document.querySelector('#book-form .form-right') ||
-                document.querySelector('#book-form .form-card')  ||
-                document.querySelector('.form-card');
+            const bookFormSection = document.getElementById('book-form');
+            if (!bookFormSection) return;
 
-            if (formTarget) {
-                formTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Scroll to the section itself (not an inner div) so position is stable.
+            // A second pass at 500 ms corrects for any layout shift caused by
+            // lazy-loaded images above the fold settling into their final heights.
+            function scrollToBookForm() {
+                const navH = (navbar && navbar.offsetHeight) ? navbar.offsetHeight : 72;
+                const targetY = bookFormSection.getBoundingClientRect().top + window.pageYOffset - navH;
+                window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
             }
+
+            scrollToBookForm();
+            setTimeout(scrollToBookForm, 500);
             return;
         }
 
